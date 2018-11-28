@@ -1,0 +1,431 @@
+<ion-view title='{{gameTitle}}  ' id="page3" cache-view="false" ng-controller="gameCtrl">
+
+
+ 
+ 
+  <div class="bar bar-subheader bar-light">
+	  <h1 class="title">  {{msg}} </h1>
+    <div ng-show="base_msg_window">
+      <button ng-click="base_msg_click()" class="button button-outline button-assertive" ><span  class="ion-wifi " style=";color:#ef473a;float:left;padding-right:18px;"> {{base_msg_data}}</span>
+      </button>
+    </div>
+	</div>
+
+
+<ion-content padding="true" class="has-header has-subheader" on-swipe-left="swipe('left')">
+
+<style>
+
+.filltext_due {
+  text-align: center !important;
+  width:80% !important;
+  font-size:4vw !important;
+  
+}
+
+.col {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-radius: 6px;
+    background: #323232;
+    margin:5px;
+    color:white;
+    font-family: helvetica neue; font-size: 180%; font-style: italic; font-weight: bold;
+}
+
+.col_green {
+ 
+    background: #28a54c;
+ 
+}
+.col_purple {
+ 
+    background: #b942f4;
+ 
+}
+.col_orange {
+  background:#FF3100;
+}
+.col_blue {
+  background: #1300D7;
+}
+
+.col-24 { padding: 15px 5px 15px 5px;margin:1px; }
+.colh {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: rgb(221, 221, 221);
+   margin:5px;
+  color:323232;
+  font-family: helvetica neue; font-size: 260%; font-style: italic; font-weight: bold;
+  line-height: 120%;
+}
+
+.col-record {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: rgb(221, 221, 221);
+   margin:5px;
+  color:323232;
+  font-family: helvetica neue; font-size: 400%; font-style: italic; font-weight: bold;
+  line-height: 120%;
+}
+.colg {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #089c05;
+  border-radius: 6px;
+  background: #089c05;
+   margin:0 0 5px 5px;
+  color:#ffffff;
+  font-family: helvetica neue; font-size: 120%;   
+}
+.cold {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-radius: 6px;
+    background: rgb(221, 221, 221);
+     margin:0 0 5px 5px;
+    color:323232;
+    font-family: helvetica neue; font-size: 120%;   
+}
+.playername {
+  font-family: helvetica neue; font-size: 160%; font-style: italic; font-weight: bold;
+}
+.balanced2, a.balanced2 {
+    font-size: 55px !important;
+}
+.ion-alert-circled {
+    line-height: inherit;
+    font-size: 45px !important;
+}
+.ion-gear-a {
+    line-height: inherit;
+    font-size: 45px !important;
+
+}
+.tabs {background-image:linear-gradient(0deg, #b2b2b2, #b2b2b2 95%, transparent 0%);
+}
+.tabs {background-image:none !important);
+}
+.tab-item{opacity: 1; font-size:40px;}
+.player1_color{background-color:#FF3100;display:inline;float:left;padding:15px;width:50%;
+              border-radius:5px 0 0 5px;height:100%;white-space: nowrap;
+             text-align: center;
+ 
+  
+  font-size:4vw;
+
+}
+.player2_color{background-color:#0345bd;display:inline;float:left;padding:15px;width:50%;
+              border-radius:0 6px 6px 0;height:100%;white-space: nowrap;text-align: center;
+ 
+  
+  font-size:4vw;}
+#progress {
+  position: relative;
+  text-align:left;
+}
+#ProgressInner {
+  width:100%; border-top:1px solid black; position:relative;
+}
+#blueBar {
+    position: absolute;
+    width: 1%;
+    height: 20%;
+    background-color: #387ef5;
+   
+}
+#orangeBar {
+    position: absolute;
+    width: 1%;
+    height: 20%;
+    background-color: #ef473a;
+   
+}
+#progressContent{ margin-top:10px; }
+
+.container {
+  height:140px;
+  position:relative;
+  overflow:hidden;
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: rgb(221, 221, 221);
+   margin:5px;
+  color:323232;
+  font-family: helvetica neue; font-size: 400%; font-style: italic; font-weight: bold;
+  line-height: 120%;
+}
+.container .cell {
+ 
+  text-align:center;
+  line-height:29px;
+  position:absolute;
+  top:60px;
+  left:0;
+  right:0;
+ 
+  width:100%;
+  
+  font-size:17vw;
+}
+.swap-animation.ng-enter, .swap-animation.ng-leave {
+  transition:0.3s linear all;
+}
+.swap-animation.ng-enter {
+  top:-250px;
+  transition:0.3s linear all;
+  opacity:1;
+}
+.swap-animation.ng-enter-active {
+  top:0px;
+  opacity:1;
+}
+.swap-animation.ng-leave {
+  top:0px;
+  transition:0.3s linear all;
+  opacity:1;
+}
+.swap-animation.ng-leave-active {
+  top:250px;
+  opacity:0;
+}
+ .bar.bar-calm .title { 
+ 
+  font-family: impact;
+  text-transform: uppercase;
+  font-style: normal;; 
+
+  }
+
+@font-face {
+    font-family: 'Impact';
+    src: url('css/Impact.eot');
+    src: url('css/Impact.eot') format('embedded-opentype'),
+         url('css/Impact.woff2') format('woff2'),
+         url('css/Impact.woff') format('woff'),
+         url('css/Impact.ttf') format('truetype'),
+         url('css/Impact.svg#Impact') format('svg');
+}
+</style>
+
+ 
+ <div class="container" ng-show="showRecordTime">
+ <div style="text-align: right; font-size:60%;position:relative;top:-30px;">{{countdownhidden}} {{countdown2}}   {{countdown3hidden}} </div>
+ <div style="text-align: right; font-size:60%;position:relative;top:-34px;" ng-show="showRestartLabel"><i class="icon ion-refresh balanced2" style="font-size:100% !important;"></i> when ready</div>
+
+
+ <div style="color: #323232;font-size:50%; position:absolute;left:20px;bottom:0%;text-align:left;"><!--last shot/group time--></div>
+  <div ng-animate-swap="numberDisp" class="cell swap-animation" >
+    {{ numberDisp }} <span style="font-size:30%">{{misses}}</span><div style="font-size:30%;text-align:left;padding-left:20px;">{{player}}</div>
+
+
+  </div>
+  <div style="font-size:30%;text-align: right;padding-top:10px;">{{fastest_shot_sofar}}</div>
+</div>
+
+
+
+
+    <div class="row" ng-show="player_messages">
+          <div class="col col-25" style="background:#0188ca; font-size:100%;">{{matchtype}}</div>
+          <div class="col col-75" style="background:#0188ca;padding:0;">
+            <div class="player1_color" >{{player_msg}}</div>
+            <div class="player2_color">{{player2_msg}}</div>
+          </div>
+      </div>
+
+
+    <div class="row">
+       <div class="colh" ng-show="showMainCountdownWindow"> 
+     
+       {{countdownhidden}} {{countdown2}}   {{countdown3hidden}} 
+      </div>
+      
+    </div>
+    
+    <div ng-bind-html="divTargetsOnline"></div>
+
+    <div class="row" ng-show="capture_the_flag" >
+      <div class="cold col-23 " id="progress">
+        <div id="ProgressInner">
+            <div id="blueBar"   style="{{blueBarWidth}};"></div>
+            <div id='progressContent'>
+            <i class="ion-android-person positive"></i>
+            {{player_msg}} 
+            <span style="float:right"><i class="ion-ios-time"> {{bluePointsTime}} </i></span>
+            </div>
+ 
+        </div>
+
+      </div>
+      <div class="cold col-48 "  id="progress">
+        <div id="ProgressInner">
+          <div id="orangeBar"   style="{{orangeBarWidth}};"></div>
+            <div id='progressContent'>
+              <i class="ion-android-person assertive"></i>
+               {{player2_msg}} 
+               <span style="float:right"><i class="ion-ios-time"> {{orangePointsTime}} </i></span>
+            </div>
+        </div> 
+      </div>
+    </div>
+ 
+ 
+    <div class="spacer" style="width: 300px; height: 5px;"></div>
+
+    <div class="row" ng-show="capture_the_flag" >
+       <div class="cold col-24" style="background: transparent;border:0px;"><i class="ion-flag"> {{flag1}}</i>
+       <br/>{{flag1_msg}}
+    
+       </div>
+      <div class="cold col-24" style="background: transparent;border:0px;"><i class="ion-flag"> {{flag2}}</i>
+        <br/>{{flag2_msg}}
+      </div>
+      <div class="cold col-24" style="background: transparent;border:0px;"><i class="ion-flag"> {{flag3}}</i>
+      <br/>{{flag3_msg}}
+      </div>
+    </div>
+
+
+
+    <div class="row" ng-show="capture_the_flag" >
+       <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag11}}">{{targ1}}</a>
+        <a class="button {{flag12}}">{{targ2}}</a>
+        
+    </div>
+
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag21}}">{{targ3}}</a>
+        <a class="button {{flag22}}">{{targ4}}</a>
+        
+      </div>
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag31}}">{{targ5}}</a>
+        <a class="button {{flag32}}">{{targ6}}</a>
+      </div>
+    </div>
+     
+
+    <!--  9 paddles 
+     <div class="row" ng-show="capture_the_flag" >
+       <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag11}}">{{targ1}}</a>
+        <a class="button {{flag12}}">{{targ2}}</a>
+        <a class="button {{flag13}}">{{targ3}}</a>
+    </div>
+
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag21}}">{{targ4}}</a>
+        <a class="button {{flag22}}">{{targ5}}</a>
+        <a class="button {{flag23}}">{{targ6}}</a>
+      </div>
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag31}}">{{targ7}}</a>
+        <a class="button {{flag32}}">{{targ8}}</a>
+        <a class="button {{flag33}}">{{targ9}}</a>
+      </div>
+    </div>
+    -->
+     
+ 
+
+    <div class="row" ng-show="singletap_columns">
+      <div class="cold col-23"><i class="ion-pinpoint">  {{targets_remaining}}</i></div>
+      <div class="cold col-48"><i class="ion-android-time"> Shot time</i></div>
+    </div>
+
+    <div class="row" ng-show="doubletap_columns">
+      <div class="cold col-23"><i class="ion-pinpoint">  {{targets_remaining}}</i></div>
+      <div class="cold col-48"><i class="ion-android-time"> Shot time</i></div>
+      <div class="cold col-48"><i class="ion-android-time"> Split time</i></div>
+    </div>
+
+    <div ng-bind-html="divHitLog"  style="max-height:445px;overflow-y: scroll;">
+   </div>
+     
+    
+    <div class="row" style="padding-left:10px;">
+      <div ng-bind-html="gameOptions" ng-show="showGameOptions"></div>
+    </div>
+ 
+
+
+     
+
+  
+
+ 
+    <div id="protection" style="width:70%;position:relative;left:15%;border:4px solid #333;border-radius:6px;" ng-show="showSafetyCheck">
+      <div style="width:100%;background-color:#333;"><h1 style="text-align: center;padding:7px;color:white;font-size:30px;">Safety check</h1>
+      </div>
+      <img src="img/eye_ear_2.png" style="max-width:30%;position: relative;left:20%"/>
+      <img src="img/eye_ear_1.png" style="max-width:30%;position: relative;left:20%"/>
+      <div style="width:100%;background-color:#333;height:100%;"><h3 style="text-align: center;color:white;padding:7px;">Eyes &nbsp;&nbsp; &amp; &nbsp;&nbsp;Ears</h3>
+      </div>
+      
+    </div>
+          
+    <audio src="audio/beep.wav" preload="auto" id="beepwav"></audio>
+    <audio src="audio/half-second-beep.wav" preload="auto" id="beepwav"></audio>
+
+    <div class="spacer" style="width: 300px; height: 224px;"></div>
+</ion-content>
+
+<style>
+      .button-small { margin-right:6px;margin-bottom:6px;}
+
+      .icon { font-size:52px !important; }
+</style>
+
+
+<div class="tabs tabs-icon-only" style="height:70px;padding:8px;">
+  <a class="tab-item" ng-click="restart()" ng-show="show_restart" style="height:58px;background-color: rgba(8,156,5,0.1); border:2px solid #089c05;border-radius:4px;">
+    <i class="icon ion-refresh balanced2" style="color:#089c05;"></i>
+  </a>
+
+  <a class="tab-item" ng-click="startGame()" ng-show="show_start" style="height:54px;background-color: rgba(8,156,5,0.1); border:2px solid #089c05;border-radius:4px;">
+    <i class="icon ion-arrow-right-b balanced2" style="color:#089c05;"></i>
+  </a>
+  <a class="tab-item" >
+    <i class="icon ion-alert-circled " ng-click="stopGame()" style="color:#bb2323;"></i>
+  </a>
+  <a class="tab-item" href="#/page1/page2">
+    <i class="icon ion-ios-game-controller-a"></i>
+  </a>
+</div>
+
+
+</ion-view>
+
+
+

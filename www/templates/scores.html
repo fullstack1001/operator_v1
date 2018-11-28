@@ -1,0 +1,198 @@
+<ion-view title="Scores" id="page3">
+  <link rel="stylesheet" type="text/css" href="./css/scores.css">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+    <div id="scores-button-bar2" class="button-bar">
+      <button id="scores-button6" class="button button-positive  button-block" style="border-right:1px solid #666;" ng-click="prevgames=false;show_currgame=true">Last Game</button>
+      <button id="scores-button7" class="button button-positive  button-block" ng-click="show_prevgames=true;show_currgame=false">Previous Games</button>
+    </div>
+    <div ng-show="show_currgame">
+      <div class="item item-divider" style="width:100%;">
+        <i class="ion-pinpoint" style="width:10%;"> Summary</i>
+        <span style="color:#bb2323;text-align: right;float:right;width:50%;">
+         <button id="restart_prev_game" ng-show="show_restart_button" ng-click="play_previous_game()" class="button button-positive button-block" style="width:160px;float:right;background: rgba(8,156,5, .1);border:1px solid #089c05;margin:0;">
+          <i class="icon ion-refresh balanced2" style="color:#089c05;font-size:1em"> previous match</i>
+        </button>
+        </span>
+ 
+      </div>
+      <div class="item ">
+        <div class="row" ng-show="showBestTimes">
+          <div class="coli stable i" style="height:27vmax;margin-left:0; overflow: hidden">
+
+            <div style="position:relative;top:-40px;">
+            <div ng-class="shot_or_group_time_class">{{shot_or_group_time}}</div>
+            <div class="filltext">
+              {{fastest_response}}
+            </div>
+            <div  ng-show="by_player" style="font-size:5vw;text-align: right; position:relative;top:-20px;">by {{fastest_player}}</div>
+       
+          </div>
+
+            <div ng-show="showHitTime" style="position:absolute;right:40px;top:40px;font-size:30%;text-align: right">{{paddles_hit}} hits in
+              <span style="font-size:5vw;">{{completed_game_time}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-score-2 col-50 stable gametitle filltext_gamename">{{gamename}}</div>
+          <div class="col-score-2 col-50 stable i">{{matchtype}}</div>
+        </div>
+        
+        <div class="row" ng-show="show_versus_score">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Score </div>
+          <div class="col-score-2 col-50 stable i">{{vs_score}}</div>
+        </div>
+        <div class="row" ng-show="show_hit_factor">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Hit factor </div>
+          <div class="col-score-2 col-50 stable i">{{hit_factor}}</div>
+        </div>
+
+        
+        <div class="row" ng-show="show_shoot_no_shoot">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Shoot / No shoot </div>
+          <div class="col-score-2 col-50 stable i">{{shoot_no_shoot}}</div>
+        </div>
+        <div class="row" ng-show="showFastestResponse">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Fastest response</div>
+          <div class="col-score-2 col-50 stable i">{{fastest_response1}} sec</div>
+        </div>
+        <div class="row" ng-show="showFastestResponsePvP">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Fastest response</div>
+          <div class="col-score-2 col-50 stable i">{{fastest_response2}} sec</div>
+        </div>
+
+        <div class="row" ng-show="show_avg_response">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Avg response </div>
+          <div class="col-score-2 col-50 stable i">{{avg_response}}</div>
+        </div>
+        
+        
+        <div class="row" ng-show="show_avg_split">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Fastest Split</div>
+          <div class="col-score-2 col-50 stable i">{{fastest_split}}</div>
+        </div>
+        <div class="row" ng-show="show_avg_split">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Avg Split</div>
+          <div class="col-score-2 col-50 stable i">{{avg_split}} sec</div>
+        </div>
+        <div class="row" ng-show="show_most_hits">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Most hits</div>
+          <div class="col-score-2 col-50 stable i">{{most_hits}}</div>
+        </div>
+        <!--
+        <div class="row">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Hit Ratio </div>
+          <div class="col-score-2 col-50 stable i">{{hits_vs_serves}}% <i class="ion-arrow-up-c balanced-text">({{paddles_hit}}/{{paddles_served}})</i> &nbsp;</div>
+        </div>
+        <div class="row">
+          <div class="col-score-2 col-50 stable" style="text-align:left;">Completed in</div>
+          <div class="col-score-2 col-50 stable i">{{completed_game_time}} sec</div>
+        </div>-->
+        <!--
+          <div class="row">
+            <div class="col-score-2 stable"  style="text-align:left;">Speed</div>
+            <div class="col-score-2 stable i" >800 ms
+          </div>
+          -->
+      </div>
+      <div class="item item-divider" ng-show="showChartdata">
+        <i class="ion-clipboard"> Shot performance over time</i>
+      </div>
+
+      <div class="item item-text-wrap" ng-show="showChartdata">
+        <canvas id="line" class="chart chart-line" chart-colors="colors" chart-data="data" height="100" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick">
+        </canvas>
+      </div>
+
+
+      <div class="item item-divider">
+        <i class="ion-clipboard"> Hit log</i>
+      </div>
+      <div class="item item-text-wrap">
+        <div class="row">
+          <div class="col-dark " ng-show="player_column">Player</div>
+          <div class="col-dark">Target #</div>
+          <div class="col-dark">Shot time</div>
+          <div class="col-dark" ng-show="show_avg_split">Split time</div>
+          <div class="col-dark">Game clock</div>
+        </div>
+
+
+        <div class="row" ng-repeat="stat in stats">
+          <div class="col-score" ng-show="player_column" style="white-space: nowrap;">{{stat.player_name}}</div>
+          <div class="col-score">{{stat.target_presented}}</div>
+          <div class="col-score">{{stat.time_till_hit}}</div>
+          <div class="col-score" ng-show="show_avg_split">{{stat.split_time}}</div>
+          <div class="col-score">{{stat.target_hit_time}}</div>
+        </div>
+      </div>
+
+
+    </div>
+ 
+
+    <div ng-show="show_prevgames">
+
+
+      <div class="item item-divider">
+        Previous Games
+      </div>
+
+ 
+      <div class="item item-text-wrap" ng-show="!commercialDisplay" style="margin-left:0;padding-left:0">
+        <div class="row">
+          <div class="col-dark col-25" style="font-size:1.3em;">Game</div>
+          <div class="col-dark col-25" style="font-size:1.3em;">Players</div>
+          <div class="col-dark col-25" style="font-size:1.3em;">Score</div>
+          <div class="col-dark col-25" style="font-size:1.3em;">Game time</div>
+ 
+        </div>
+        <div class="row" ng-repeat="item in items">
+          <div class="col-score col-25 button button-positive   forcestyle"  style="font-size:1.1em;line-height: 1.2em;" ng-click="$parent.show_currgame=true;$parent.show_prevgames=false;show_past_game({{item.game_id}})"> {{item.game_name}}
+            <br/>
+            <span style="font-size:70%; ">{{item.date_formatted}}</span>
+          </div>
+          <div class="col-score col-25" style="font-size:1.3em;line-height: 2em;">{{item.names}}</div>
+          <div class="col-score col-25" style="font-size:1.3em;line-height: 2em;">{{item.scores}}</div>
+          <div class="col-score col-25" style="font-size:1.3em;line-height: 2em;">{{item.overall_time}}</div>
+ 
+        </div>
+      </div>
+      
+
+ 
+ 
+      <div class="item item-text-wrap"  ng-show="commercialDisplay"  style="margin-left:0;padding-left:0">
+        <div class="row">
+          <div class="col-dark col-20">Game</div>
+          <div class="col-dark col-20">Players</div>
+          <div class="col-dark col-20">Score</div>
+          <div class="col-dark col-20">Game time</div>
+          
+          <div class="col-dark col-20">Actions</div>
+        </div>
+        <div class="row" ng-repeat="item in items">
+          <div class="col-score col-20 button button-positive "  style="font-size:1.1em;line-height: 1.2em;" ng-click="$parent.show_currgame=true;$parent.show_prevgames=false;show_past_game({{item.game_id}})"> {{item.game_name}}
+            <br/>
+            <span style="font-size:70%; ">{{item.date_formatted}}</span>
+          </div>
+          <div class="col-score col-20">{{item.names}}</div>
+          <div class="col-score col-20">{{item.scores}}</div>
+          <div class="col-score col-20">{{item.overall_time}}</div>
+          
+          <div class="col-score col-20"><div ng-bind-html="item.cloud_status" ng-click="changeCloudStatus( {{item.game_id}})"></div></div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </ion-content>
+</ion-view>

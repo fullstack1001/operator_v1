@@ -1,0 +1,46 @@
+<ion-view title="Battery levels" id="diagnastics">
+  <style>
+    .red{
+      color:red;
+    }
+    .target-icon{
+      float:left;
+      padding-left:35px;
+    }
+    .target-note{
+      float:left;
+      color:green;
+      opacity:0.5;
+      font-size:80%;
+    }
+  </style>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+  <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="list card" id="diagnostics-card">
+      <ion-list id="diagnostics-list1" ng-show="target_online_count" ng-repeat="item in items">
+        <ion-item class="item-icon-right" id="battery-{{item.id}}" ng-click="pingTarget(item.id)" >
+          <span class="item-icon-left" class="target-icon"><i class="icon ion-android-locate assertive"></i>Target {{item.id}}</span>
+          <span class="item-note" class="target-note">{{item.online_msg}}</span>
+          <span class="item-note">{{item.volt_percent}}</span>
+          <i class="icon {{item.battery_icon}}"></i>
+        </ion-item>
+      </ion-list>
+      <!--No connected targets -->
+      <ion-list id="diagnostics-list2"
+        <ion-item class="item-icon-right" id="diagnostics-list-item2" ng-show="!target_online_count">
+          <span class="item-icon-left" class="target-icon"><i class="icon ion-android-locate assertive"></i><span class="red">No Connected Targets</span></span>
+          <i class="icon icon ion-battery-empty"></i>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,40 @@
+<ion-view title="Notifications" id="notifications" ng-controller="notificationsCtrl">
+  <style>
+    .notice{
+      color: red;
+      font-size: 16px;
+    }
+  </style>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+  <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+    <ul class="list">
+      <li class="item item-text-wrap notice" collection-repeat="message in base_msg_data" ng-click="go('/home/diagnostics')"><button class="button-icon ion-minus-circled assertive" ng-click="removeAlert(message)"></button>{{message}}</li>
+    </ul>
+  </ion-content>
+  <ion-tabs class="tabs-stable tabs-icon-top" id="home-tabs1">
+    <ion-tab title="Home" icon="ion-home" href="#/home/welcome" id="home-tab1" ng-click="goBack()">
+      <ion-nav-view name="tab1"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Games &amp; Drills" icon="ion-ios-game-controller-a" href="#/home/gamesDrills" id="home-tab3">
+      <ion-nav-view name="tab3"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Scores" icon="ion-ios-speedometer" href="#/home/scores" id="home-tab4">
+      <ion-nav-view name="tab4"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Settings" icon="ion-android-settings" href="#/home/settings" id="home-tab5">
+      <ion-nav-view name="tab5"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Profiles" icon="ion-person" href="#/home/profile" id="profile-tab6">
+      <ion-nav-view name="tab6"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>

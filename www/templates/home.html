@@ -1,0 +1,81 @@
+<ion-view title='{{home_title}}' id="page7" ng-controller="home2Ctrl as vm">
+  <link rel="stylesheet" type="text/css" href="./css/home.css">
+  <!-- for android, add this to style margin-top:72px;height:auto; -->
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications"><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <!--TODO: debug this console error: Refresher must be immediate child of ion-content or ion-scroll-->
+  <ion-content padding="true" class="has-header">
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="" style="padding:0;">
+      <img src="img/operator.png" style="max-width: 100%; " ng-click="easteregg()"/>
+    </div>
+    <div class="list card">
+      <div class="item item-avatar" style="padding-left:18px;">
+    
+        <div ng-bind-html="base"></div>
+
+ 
+      </div>
+    </div>
+    <div class="list card" style="text-align:left;font-style:normal;" ng-show="showTargetDiv">
+      <div class="item item-avatar" style="padding-left:18px;overflow-x: scroll;">
+        <h1>{{target_online_count_display}} <span class="container" ng-show="showSpinny"><i class="icon ion-ios-loop-strong spin "> {{discovery_state}}</i></span></h1>
+   
+        <div ng-bind-html="divTargetsOnline" ></div>
+ 
+        <div class="row"  >
+        <div class="col col-24" ng-show="showTarg1" ng-click="flashTarget(1)">1</div>
+        <div class="col col-24" ng-show="showTarg2" ng-click="flashTarget(2)">2</div>
+        <div class="col col-24" ng-show="showTarg3" ng-click="flashTarget(3)">3</div> 
+        <div class="col col-24" ng-show="showTarg4" ng-click="flashTarget(4)">4</div>
+        <div class="col col-24" ng-show="showTarg5" ng-click="flashTarget(5)">5</div>
+        <div class="col col-24" ng-show="showTarg6" ng-click="flashTarget(6)">6</div>
+        <div class="col col-24" ng-show="showTarg7" ng-click="flashTarget(7)">7</div>
+        <div class="col col-24" ng-show="showTarg8" ng-click="flashTarget(8)">8</div>
+        <div class="col col-24" ng-show="showTarg9" ng-click="flashTarget(9)">9</div>
+        <div class="col col-24" ng-show="showTarg10" ng-click="flashTarget(10)">10</div>
+        <div class="col col-24" ng-show="showTarg11" ng-click="flashTarget(11)">11</div>
+        <div class="col col-24" ng-show="showTarg12" ng-click="flashTarget(12)">12</div>
+        <div class="col col-24" ng-show="showTarg13" ng-click="flashTarget(13)">13</div>
+        <div class="col col-24" ng-show="showTarg14" ng-click="flashTarget(14)">14</div>
+        <div class="col col-24" ng-show="showTarg15" ng-click="flashTarget(15)">15</div>
+        <div class="col col-24" ng-show="showTarg16" ng-click="flashTarget(16)">16</div>
+        </div>
+ 
+      </div>
+    </div>
+    <a ng-click="discoverTargets()" class="item item-icon-left">
+      <i class="icon ion-android-locate"></i>
+      <span>Discover Targets</span>
+    </a>
+    <a ui-sref="home.safety" class="item item-icon-left">
+      <i class="icon ion-android-warning"></i>
+      <span>Safety Instructions</span>
+    </a>
+    <a ui-sref="home.help" class="item item-icon-left">
+      <i class="icon ion-android-list"></i>
+      <span>Getting Started</span>
+    </a>
+    <a href="#/home/diagnostics" ui-sref="home.diagnostics" class="item item-icon-left">
+      <i class="icon ion-battery-charging"></i>
+      <span>Battery Levels</span>
+    </a>
+    <!--
+    <a ui-sref="home.buildRange" class="item item-icon-left">
+      <i class="icon ion-paintbrush"></i>
+      <span style="color:grey">Build a custom game</span>
+    </a>-->
+    <a ui-sref="home.terms" class="item item-icon-left">
+      <i class="icon ion-document-text"></i>
+      <span>Terms and Conditions</span>
+    </a>
+    <a ui-sref="home.version" class="item item-icon-left">
+      <i class="icon ion-code-download"></i>
+      <span>Version Info</span>
+    </a>
+  </ion-content>
+</ion-view>

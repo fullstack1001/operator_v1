@@ -1,0 +1,16 @@
+/*  profile.css, FOR: templates/profile.html  */
+.item-avatar {
+  float: left;
+  min-height: 39px;
+  padding-left:0px;
+}
+
+.toggle-special {
+  border: 0 !important;
+}
+
+.item {
+  padding: 16px;
+}
+.item-avatar {font-size:120%;}
+.item-toggle .toggle{ top:0px !important; }

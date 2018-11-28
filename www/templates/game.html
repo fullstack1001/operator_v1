@@ -1,0 +1,411 @@
+<ion-view title='{{gameTitle}}' id="scores" cache-view="false" ng-controller="gameCtrl" >
+  <link rel="stylesheet" type="text/css" href="./css/game.css">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <div class="" ng-class="background_color_changer" >
+    <h1 class="title" >  {{msg}} </h1>
+   
+  </div>
+  <ion-content padding="true" class="has-header has-subheader" on-swipe-left="swipe('left')">
+ 
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+ 
+    <div class="row" >
+          <div class="col-20 "  ng-show="commercialDisplay" style="display:hidden;">
+
+<!--
+            <div class="playerlisttopblock"  ng-show="commercialDisplay">
+              <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input type="text" ng-model="username" >
+              </label>
+              <button class="button button-positive   button-block" style="margin:10px; width:180px;" ng-click="addUser(username)">
+                Add player
+              </button>
+              <div style="height:30px;">{{msg_due}}</div>
+            </div>
+
+-->
+ 
+
+            <div class="playerlistblock" style="overflow-y: scroll;" >
+              <ion-list>
+                <ion-radio class="scroll-y" ng-show="radio_list_players" class="playername" ng-click="add_player_to_game('{{player.id}}')" show-reorder="shouldShowReorder" ng-repeat="player in player_names " ng-model="player.isChecked"  ng-checked="player.isChecked">{{player.name}}</ion-radio>
+                <ion-checkbox ng-show="checkbox_list_players" class="playername" ng-click="add_player_to_game('{{player.id}}')" show-reorder="shouldShowReorder" ng-repeat="player in player_names" ng-model="player.isChecked"  >{{player.name}}</ion-checkbox>
+              </ion-list>
+              <!--  ng-model="player.isChecked" ng-checked="isChecked"-->
+            </div>
+          </div>
+          <div  ng-class="maincolumn_width"  >
+            
+
+ 
+  
+
+    <div class="container" ng-show="showRecordTime">
+ 
+      <div ng-show="countdownclock" style="text-align: right; font-size:60%;position:relative;top:-30px;"> {{countdown2}}    </div>
+      <div ng-show="countupclock" style="text-align: right; font-size:60%;position:relative;top:-30px;"> {{countup}}    </div>
+      
+      <div style="text-align: right; font-size:60%;position:relative;top:-34px;" ng-show="showRestartLabel"><i class="icon ion-refresh balanced2" style="font-size:100% !important;"></i> when ready</div>
+
+
+      <div style="color: #323232;font-size:50%; position:absolute;left:20px;bottom:0%;text-align:left;">
+        <!--last shot/group time-->
+      </div>
+      <div ng-animate-swap="numberDisp" class="cell swap-animation">
+        {{ numberDisp }} <span style="font-size:28%">{{misses}}</span>
+        <div style="font-size:30%;text-align:left;padding-left:20px;position:relative; bottom:30px;">{{player}}</div>
+
+
+      </div>
+      <div style="font-size:30%;text-align: right;padding-top:10px;">{{fastest_shot_sofar}}</div>
+    </div>
+
+    <div class="row" ng-show="player_messages">
+      <div class="col col-25" style="background:#0188ca; font-size:5vw;padding:19px 10px 22px 10px">{{matchtype}}</div>
+      <div class="col col-49" style="background:#0188ca;padding:0;">
+        <div class="player1_color">{{player_msg}} </div>
+        <div class="player2_color">{{player2_msg}} </div>
+      </div>
+      <div class="col col-25" style="background:rgb(221, 221, 221); color:#323232;font-size:5vw;padding:19px 10px 22px 10px; white-space: nowrap">{{countdown2}}</div>
+    </div>
+
+
+    <div class="row" >
+      <div class="colh" ng-show="show1v1" style="padding:0px;height:100px;">
+        <div style="width:50%; background-color: rgba(51, 205, 91, 0.5); float:left;border-radius: 6px 0 0 6px;height:100px;">
+          <div style="width:{{red_width}}%; background-color: #33cd5b; float:left;border-radius: 6px 0 0 6px;height:100px;">
+
+          </div>
+
+        </div>
+        <div style="width:50%; background-color: rgba(34, 68, 174, 0.5);; float:left; border-radius: 0 6px 6px 0; height:100px;">
+          <div style="width:{{blue_width}}%; background-color: #2244ae; float:left; border-radius: 0 6px 6px 0; height:100px;">
+          </div>
+          
+        </div>
+        <div style="position:relative; top:-71px;color:white;font-size:4vw;">
+           <br/>{{firstto_or_bestof}} {{firsttoscore}}
+        </div>
+        <div style="position:relative; top:-156px;left:0%;width:50%;color:white;">
+           <br/>{{player_1_score}}
+        </div>
+        <div style="position:relative; top:-241px;left:50%;width:50%;color:white;">
+           <br/>{{player_2_score}}
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="colh"  style="background-color:{{countdown_bg_color}}"; ng-show="showMainCountdownWindow">
+        {{countdownhidden}} {{countdown2}} {{countdown3hidden}} {{countup}} 
+      </div>
+
+
+
+      <div class="colh"  style="background-color:{{countdown_bg_color}}"; ng-show="showWinnerDeclaration">
+
+        {{winner_declaration}} 
+      </div>
+ 
+
+    </div>
+
+    <div class="row">
+      <div class="colh" ng-show="showInstructionMsg">
+
+        {{instructionMsg}}
+      </div>
+
+    </div>
+ 
+
+    <div ng-bind-html="divTargetsOnline"></div>
+<!--
+    <div class="row" ng-show="capture_the_flag">
+      <div class="cold col-23 " id="progress">
+        <div id="ProgressInner">
+          <div id="blueBar" style="{{blueBarWidth}};"></div>
+          <div id='progressContent'>
+            <i class="ion-android-person positive"></i> {{player_msg}}
+            <span style="float:right"><i class="ion-ios-time"> {{bluePointsTime}} </i></span>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="cold col-48 " id="progress">
+        <div id="ProgressInner">
+          <div id="orangeBar" style="{{orangeBarWidth}};"></div>
+          <div id='progressContent'>
+            <i class="ion-android-person assertive"></i> {{player2_msg}}
+            <span style="float:right"><i class="ion-ios-time"> {{orangePointsTime}} </i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="spacer" style="width: 300px; height: 5px;"></div>
+
+    <div class="row" ng-show="capture_the_flag">
+      <div class="cold col-24" style="background: transparent;border:0px;"><i class="ion-flag"> {{flag1}}</i>
+        <br/>{{flag1_msg}}
+
+      </div>
+      <div class="cold col-24" style="background: transparent;border:0px;"><i class="ion-flag"> {{flag2}}</i>
+        <br/>{{flag2_msg}}
+      </div>
+      <div class="cold col-24" style="background: transparent;border:0px;"><i class="ion-flag"> {{flag3}}</i>
+        <br/>{{flag3_msg}}
+      </div>
+    </div>
+
+
+
+    <div class="row" ng-show="capture_the_flag">
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag11}}">{{targ1}}</a>
+        <a class="button {{flag12}}">{{targ2}}</a>
+
+      </div>
+
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag21}}">{{targ3}}</a>
+        <a class="button {{flag22}}">{{targ4}}</a>
+
+      </div>
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag31}}">{{targ5}}</a>
+        <a class="button {{flag32}}">{{targ6}}</a>
+      </div>
+    </div>
+-->
+
+    <!--  9 paddles
+     <div class="row" ng-show="capture_the_flag" >
+       <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag11}}">{{targ1}}</a>
+        <a class="button {{flag12}}">{{targ2}}</a>
+        <a class="button {{flag13}}">{{targ3}}</a>
+    </div>
+
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag21}}">{{targ4}}</a>
+        <a class="button {{flag22}}">{{targ5}}</a>
+        <a class="button {{flag23}}">{{targ6}}</a>
+      </div>
+      <div class="button-bar" style="border:1px solid #666;border-radius: 6px; margin:0 10px 0 10px;">
+        <a class="button {{flag31}}">{{targ7}}</a>
+        <a class="button {{flag32}}">{{targ8}}</a>
+        <a class="button {{flag33}}">{{targ9}}</a>
+      </div>
+    </div>
+    -->
+    <div class="row">
+      <style>
+        .item{border:0px;}
+      </style>
+    <ion-list ng-show="showManualControlButtons"  style="width:100%">
+      <ion-item ng-repeat="target in activity.target track by $index" ng-class="{'list_green': is_green_and_active[target.id], 'list_yellow': is_yellow_and_active[target.id] , 'list_red': is_red_and_active[target.id]   }"  ng-style="{width: column_width}" class="manual">
+      
+        <!--
+        <div class="target_label" >Target #{{target.id}}</div>
+
+        <div ng-class="{'col_green_active': is_green_and_active[target.id]}" class="col col-24 col_green" ng-click="makeTargetActive(target.id, 'green')"  ></div>
+
+        <div ng-class="{'col_yellow_active': is_yellow_and_active[target.id]}" class="col col-24 col_yellow"  ng-click="makeTargetActive(target.id, 'yellow')">{{target.id}}</div>
+
+        <div ng-class="{'col_red_active': is_red_and_active[target.id]}" class="col col-24 col_red" ng-click="makeTargetActive(target.id, 'red')"  ></div>
+        -->
+
+
+       <!-- <div class="target_label" >Target #{{target.id}}</div>-->
+
+        <div ng-class="{'col_green_active': is_green_and_active[target.id]}" class="col col_targs col_green2" ng-click="makeTargetActive(target.id, 'green')"  ></div>
+
+        <div ng-class="{'col_yellow_active': is_yellow_and_active[target.id]}" class="col col_targs col_yellow"  ng-click="makeTargetActive(target.id, 'yellow')"><div class="target_label" > #{{target.id}}</div></div>
+
+        <div ng-class="{'col_red_active': is_red_and_active[target.id]}" class="col col_targs col_red2" ng-click="makeTargetActive(target.id, 'red')"  ></div>
+
+
+
+      </ion-item>
+    </ion-list>
+    <ion-list ng-show="showManualControlButtons_grouped"  style="width:100%">
+      <ion-item ng-repeat="target in activity.target track by $index" ng-if="$even" ng-class="{'list_green': is_green_and_active[target.id], 'list_yellow': is_yellow_and_active[target.id] , 'list_red': is_red_and_active[target.id]   }"  ng-style="{width: column_width}" class="manual">
+      
+        <!--
+        <div class="target_label" >Target #{{target.id}}</div>
+
+        <div ng-class="{'col_green_active': is_green_and_active[target.id]}" class="col col-24 col_green" ng-click="makeTargetActive(target.id, 'green')"  ></div>
+
+        <div ng-class="{'col_yellow_active': is_yellow_and_active[target.id]}" class="col col-24 col_yellow"  ng-click="makeTargetActive(target.id, 'yellow')">{{target.id}}</div>
+
+        <div ng-class="{'col_red_active': is_red_and_active[target.id]}" class="col col-24 col_red" ng-click="makeTargetActive(target.id, 'red')"  ></div>
+        -->
+
+
+        <div class="target_label" ></div>
+
+        <div ng-class="{'col_green_active': is_green_and_active[target.id]}" class="col col_targs col_green2" ng-click="makeTargetActive(target.id, 'green')"  ></div>
+
+        <div ng-class="{'col_yellow_active': is_yellow_and_active[target.id]}" class="col col_targs col_yellow"  ng-click="makeTargetActive(target.id, 'yellow')"><div class="target_label" > Group {{target.id}}</div></div>
+
+        <div ng-class="{'col_red_active': is_red_and_active[target.id]}" class="col col_targs col_red2" ng-click="makeTargetActive(target.id, 'red')"  ></div>
+
+
+
+      </ion-item>
+    </ion-list>
+    
+   </div>
+   <div class="item3  " style="width:100%" ng-show="manualControlButtons"> 
+        <button id="colorpicker" ng-class="singletap_btn" ng-click="setTap('singletap')" class="button button-gray   button" style="width:30%;display: block;margin:10px;float:left">
+         Single tap
+        </button>
+        <button id="colorpicker" ng-class="doubletap_btn" ng-click="setTap('doubletap')" class="button button-gray   button" style="width:30%;display: block; margin:10px;float:left">
+         Double tap
+        </button>
+        <button id="colorpicker" ng-class="mozambique_btn" ng-click="setTap('mozambique')" class="button button-gray   button" style="width:30%;display: block; margin:10px;">
+         Mozambique
+        </button>
+     </div>
+    <!--
+    <div class="row" >
+      
+        <div ng-class="targ1class" ng-show="showTarg1" ng-click="makeTargetActive(1)">1</div>
+        <div ng-class="targ2class" ng-show="showTarg2" ng-click="makeTargetActive(2)">2</div>
+        <div ng-class="targ3class" ng-show="showTarg3" ng-click="makeTargetActive(3)">3</div> 
+        <div ng-class="targ4class" ng-show="showTarg4" ng-click="makeTargetActive(4)">4</div>
+        <div ng-class="targ5class" ng-show="showTarg5" ng-click="makeTargetActive(5)">5</div>
+        <div ng-class="targ6class" ng-show="showTarg6" ng-click="makeTargetActive(6)">6</div>
+        <div ng-class="targ7class" ng-show="showTarg7" ng-click="makeTargetActive(7)">7</div>
+
+
+ 
+        <div ng-class="targ10class" ng-show="showTarg10" ng-click="makeTargetActive(10)">10</div>
+        <div ng-class="targ11class" ng-show="showTarg11" ng-click="makeTargetActive(11)">11</div>
+        <div ng-class="targ12class" ng-show="showTarg12" ng-click="makeTargetActive(12)">12</div>
+        <div ng-class="targ13class" ng-show="showTarg13" ng-click="makeTargetActive(13)">13</div>
+        <div ng-class="targ14class" ng-show="showTarg14" ng-click="makeTargetActive(14)">14</div>
+        <div ng-class="targ15class" ng-show="showTarg15" ng-click="makeTargetActive(15)">15</div>
+        <div ng-class="targ16class" ng-show="showTarg16" ng-click="makeTargetActive(16)">16</div>
+  
+    </div>
+    -->
+    
+
+
+    <div class="row" ng-show="singletap_columns">
+      <div class="cold col-23"><i class="ion-pinpoint">  {{targets_remaining}}</i></div>
+      <div class="cold col-48"><i class="ion-android-time"> Shot time</i></div>
+    </div>
+
+    
+<!--
+    <div class="item " ng-show="manualControlButtons"> 
+        <button id="colorpicker" ng-class="colorpicker_blue" ng-click="setColor('blue')" class="button button-positive   button">
+         blue
+        </button>
+        <button id="colorpicker" ng-class="colorpicker_red" ng-click="setColor('red')" class="button button-assertive   button">
+           Red
+        </button>
+        <button id="colorpicker" ng-class="colorpicker_green" ng-click="setColor('green')" class="button button-balanced   button">
+           Green
+        </button>
+        <button id="colorpicker" ng-class="colorpicker_purple" ng-click="setColor('purple')" class="button button-royal   button">
+           purple
+        </button>
+        <button id="colorpicker" ng-class="colorpicker_yellow" ng-click="setColor('yellow')" class="button button-energized   button">
+           Yellow
+        </button>
+        {{colorpicker_msg}}
+     </div>
+   -->
+     
+ 
+     <div class="item " ng-show="manualControlButtons"> 
+        <button id="colorpicker" ng-class="startclock_btn" style="width:100%;height: 54px; background-color: rgba(8, 156, 5, 0.1); border: 2px solid rgb(8, 156, 5); border-radius: 4px; color:rgb(8, 156, 5); font-weight:bold" ng-click="startClock()" class="button button-gray   button">
+         Start Clock
+        </button>
+       
+     </div>
+ 
+     <div class="row" ng-show="doubletap_columns">
+      <div class="cold col-23"><i class="ion-pinpoint">  {{targets_remaining}}</i></div>
+      <div class="cold col-48"><i class="ion-android-time"> Draw</i></div>
+      <div class="cold col-48"><i class="ion-android-time"> Split </i></div>
+      <div class="cold col-48"><i class="ion-android-time"> Total </i></div>
+
+    </div>
+    <div ng-bind-html="divHitLog" style="max-height:445px;overflow-y: scroll;">
+    </div>
+
+
+
+    
+ 
+      
+
+
+    <div class="row" style="padding-left:10px;">
+      <div ng-bind-html="gameOptions" ng-show="showGameOptions"></div>
+    </div>
+ 
+     
+      
+
+    <div id="protection" style="width:70%;position:relative;left:15%;border:4px solid #333;border-radius:6px;" ng-show="showSafetyCheck">
+      <div style="width:100%;background-color:#333;">
+        <h1 style="text-align: center;padding:7px;color:white;font-size:30px;">Safety check</h1>
+      </div>
+      <img src="img/eye_ear_2.png" style="max-width:30%;position: relative;left:20%" />
+      <img src="img/eye_ear_1.png" style="max-width:30%;position: relative;left:20%" />
+      <div style="width:100%;background-color:#333;height:100%;">
+        <h3 style="text-align: center;color:white;padding:7px;">Eyes &nbsp;&nbsp; &amp; &nbsp;&nbsp;Ears</h3>
+      </div>
+
+    </div>
+
+
+
+
+       </div>
+      </div>
+
+
+
+
+
+    <audio src="audio/beep.wav" preload="auto" id="beepwav"></audio>
+    <audio src="audio/half-second-beep.wav" preload="auto" id="beepwav"></audio>
+
+    <div class="spacer" style="width: 300px; height: 224px;"></div>
+  </ion-content>
+
+  <div class="tabs tabs-icon-only" style="height:70px;padding:8px;">
+    <a class="tab-item" ng-click="restart()" ng-show="show_restart" style="height:54px;background-color: rgba(8,156,5,0.1); border:2px solid #089c05;border-radius:4px;margin-right:10px;">
+      <i class="icon ion-refresh balanced2" style="color:#089c05;"></i>
+    </a>
+
+    <a class="tab-item" ng-click="startGame()" ng-show="show_start" style="height:54px;background-color: rgba(8,156,5,0.1); border:2px solid #089c05;border-radius:4px;margin-right:10px;">
+      <i class="icon ion-arrow-right-b balanced2" style="color:#089c05;"></i>
+    </a>
+    <a class="tab-item" ng-click="stopGame()" style="height:54px;background-color: rgba(187,35,35,0.1); border:2px solid #bb2323;border-radius:4px;margin-right:10px;">
+      <i class="icon ion-ios-close"  style="color:#bb2323;"></i>
+    </a>
+    <a class="tab-item" href="#/home/gamesDrills" ng-show="show_choosegame"  style="height:54px;background-color: rgba(102,102,102,0.1); border:2px solid #666;border-radius:4px;">
+      <i class="icon ion-ios-game-controller-a"></i>
+    </a>
+    <a class="tab-item" href="#/home/welcome" ng-show="show_gohome"  style="height:54px;background-color: rgba(102,102,102,0.1); border:2px solid #666;border-radius:4px;">
+      <i class="icon ion-home"></i>
+    </a>
+  </div>
+
+</ion-view>

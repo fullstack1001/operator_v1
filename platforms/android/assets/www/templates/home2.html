@@ -1,0 +1,111 @@
+
+
+<ion-view title='<img class="title-image" src="img/logo-small-white.png"  style="height:41px;padding-top:5px;"/>' id="page7" ng-controller="home2Ctrl as vm">
+   
+    <!-- for android, add this to style margin-top:72px;height:auto; -->
+   
+  
+     <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <ion-content padding="true" class="has-header " >
+ 
+
+    
+       
+<style>
+.red {color:red;}
+.col {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-radius: 6px;
+    background: #323232;
+    margin:5px;
+    color:white;
+    font-family: helvetica neue; font-size: 180%; font-style: italic; font-weight: bold;
+}
+.col-notargets {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-radius: 6px;
+    background: #fff;
+    margin:5px;
+    color:#eee;
+    font-family: helvetica neue; font-size: 180%; font-style: italic; font-weight: bold;
+}
+.ion-wifi {font-size:62px;color:#0188ca;float:left;padding-right:18px;}
+.card {margin: 7px 10px;}
+h1 {font-size:20px;}
+</style>
+ 
+  
+  <div class="" style="padding:0;">
+    <img src="img/operator.png" style="max-width: 100%; "/>
+  </div>
+        <div class="list card">
+          <div class="item item-avatar" style="padding-left:18px;">
+            <div ng-bind-html="base"></div>
+          </div>
+        </div>
+
+
+        <div class="list card" style="text-align:left;font-style:normal;">
+          <div class="item item-avatar" style="padding-left:18px;overflow-x: scroll;"> 
+            <h1>Targets online: {{target_online_count}}</h1>
+            <div ng-bind-html="divTargetsOnline"></div>
+          </div>
+        </div>
+        
+
+        <a ng-click="discoverTargets()" class="item item-icon-left">
+          <i class="icon ion-android-locate"></i>
+          Discover targets
+        </a>
+        <a ui-sref="home.safety" class="item item-icon-left">
+          <i class="icon ion-android-warning"></i>
+          <span >Safety instructions</span>
+        </a>
+        <a ui-sref="home.help" class="item item-icon-left">
+          <i class="icon ion-android-list"></i>
+          <span>Getting started</span>
+        </a>
+
+        
+        <a ui-sref="home.diagnostics" class="item item-icon-left">
+          <i class="icon ion-battery-charging"></i>
+          <span >Battery levels</span>
+        </a>
+
+ 
+        <!--
+        <a ui-sref="home.buildRange" class="item item-icon-left">
+          <i class="icon ion-paintbrush"></i>
+          <span style="color:grey">Build a custom game</span>
+        </a>-->
+        
+        <a ui-sref="home.terms" class="item item-icon-left">
+          <i class="icon ion-stats-bars"></i>
+          <span>Terms and Conditions</span>
+        </a>
+
+        
+
+   
+  
+
+
+      </div>
+    </ion-content>
+</ion-view>
+
+

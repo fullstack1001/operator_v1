@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    
+    
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+     
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-audio/app/angular.audio.js"></script>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <link href="css/ionic.app.css" rel="stylesheet">
+
+    <!-- Auth0 Lock 
+    <script src="lib/auth0-lock/build/auth0-lock.js"></script>
+ 
+    <script src="lib/auth0-angular/build/auth0-angular.js"></script>
+ 
+    <script src="lib/a0-angular-storage/dist/angular-storage.js"></script>
+ 
+    <script src="lib/angular-jwt/dist/angular-jwt.js"></script>
+-->
+    
+    <!-- angular audio -->
+    <script src="lib/angular-audio/app/angular.audio.js"></script>
+
+
+    <script src="lib/chart.js/dist/Chart.js"></script>
+    <script src="bower_components/ngFitText/dist/ng-FitText.min.js"></script>
+    <script src="lib/angular-chart.js/dist/angular-chart.min.js"></script>
+
+    <style type="text/css">
+      .platform-ios .manual-ios-statusbar-padding{
+        padding-top:20px;
+      }
+      .manual-remove-top-padding{
+        padding-top:0px; 
+      }
+      .manual-remove-top-padding .scroll{
+        padding-top:0px !important;
+      }
+      ion-list.manual-list-fullwidth div.list, .list.card.manual-card-fullwidth {
+        margin-left:-10px;
+        margin-right:-10px;
+      }
+      ion-list.manual-list-fullwidth div.list > .item, .list.card.manual-card-fullwidth > .item {
+        border-radius:0px;
+        border-left:0px;
+        border-right: 0px;
+      }
+    </style>
+     <style type="text/css" >
+     @font-face {
+      @font-face {
+          font-family: 'NexaHeavy';
+          src: url('lib/ionic/fonts/NexaHeavy.eot');
+          src: url('lib/ionic/fonts/NexaHeavy.eot') format('embedded-opentype'),
+               url('lib/ionic/fonts/NexaHeavy.woff2') format('woff2'),
+               url('lib/ionic/fonts/NexaHeavy.woff') format('woff'),
+               url('lib/ionic/fonts/NexaHeavy.ttf') format('truetype'),
+               url('lib/ionic/fonts/NexaHeavy.svg#NexaHeavy') format('svg');
+
+
+      }
+
+      @font-face {
+          font-family: 'NexaHeavyItalic';
+          src: url('lib/ionicfonts/NexaHeavyItalic.eot');
+          src: url('lib/ionicfonts/NexaHeavyItalic.eot') format('embedded-opentype'),
+               url('lib/ionicfonts/NexaHeavyItalic.woff2') format('woff2'),
+               url('lib/ionicfonts/NexaHeavyItalic.woff') format('woff'),
+               url('lib/ionicfonts/NexaHeavyItalic.ttf') format('truetype'),
+               url('lib/ionicfonts/NexaHeavyItalic.svg#NexaHeavyItalic') format('svg');
+      }
+
+      @font-face {
+          font-family: 'NexaRegularItalic';
+          src: url('lib/ionicfonts/NexaRegularItalic.eot');
+          src: url('lib/ionicfonts/NexaRegularItalic.eot') format('embedded-opentype'),
+               url('lib/ionicfonts/NexaRegularItalic.woff2') format('woff2'),
+               url('lib/ionicfonts/NexaRegularItalic.woff') format('woff'),
+               url('lib/ionicfonts/NexaRegularItalic.ttf') format('truetype'),
+               url('lib/ionicfonts/NexaRegularItalic.svg#NexaRegularItalic') format('svg');
+      }
+ 
+    </style>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/homeController.js"></script>
+    <script src="js/gameController.js"></script>
+    <script src="js/chooseGameController.js"></script>
+    <script src="js/login.controller.js"></script>
+    <script src="js/profile.controller.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/auth0.variables.js"></script>
+    <script src="js/socket.js"></script>
+    
+    <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+
+    
+
+   <!-- <script src="http://192.168.8.1:8081/socket.io/socket.io.js"></script>-->
+    <script>
+ //var manager = io.Manager('http://' + ip + ':' + port + '/', {transports: ['websocket'], upgrade: false});
+ //var socket = io.connect('http://' + ip + ':' + port + '/', {transports: ['websocket'], upgrade: false});
+
+  var manager = io.Manager('http://' + ip + ':' + port + '/', {});
+ var socket = io.connect('http://' + ip + ':' + port + '/', {});
+    </script>
+
+
+ 
+
+
+  </head>
+  <body ng-app="app" animation="slide-left-right-ios7" class="platform-android platform-cordova platform-webview">
+
+    <div ng-load-script></div>
+
+
+ 
+ 
+    <div>
+        <ion-nav-view></ion-nav-view>
+
+        <ion-nav-bar class="bar-calm">
+        
+            <!--<ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>-->
+ 
+        </ion-nav-bar> 
+
+
+        
+      
+    </div>
+ 
+ 
+ 
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<ion-view title="Player Profiles" id="page12" ng-controller="profileController as vm">
+<div class="bar bar-subheader bar-light">
+	  <h1 class="title">  {{msg}}</h1>
+	  <div ng-show="base_msg_window">
+	    <button ng-click="base_msg_click()" class="button button-outline button-assertive" ><span  class="ion-wifi " style=";color:#ef473a;float:left;padding-right:18px;"> {{base_msg_data}}</span>
+	    </button>
+	  </div>
+</div>
+    <ion-content padding="true" class="has-header has-subheader">
+
+
+ 
+
+ 
+ 
+<div>
+ <h3>Add a player</h3>
+
+
+<label class="item item-input">
+  <span class="input-label">Username</span>
+  <input type="text" ng-model="username" ng-change="getUserName(username)">
+</label>
+<button class="button button-full button-positive" ng-click="vm.addUser()">
+       Add player
+      </button>
+</div>
+
+{{msg_due}}
+<style>
+.item-avatar {float:left;min-height:39px;}
+.toggle-special {border:0 !important;}
+.item {padding:10px;}
+.list-h2 {position:relative;top:15px;text-align:left;}
+</style>
+ <h3>Active players</h3>
+ <p> Marking players as inactive removes players from the player selection pool when setting up a game or training scenario.</p>
+ <ion-list>
+  <ion-item ng-repeat="player in players track by $index">
+
+		<ion-toggle ng-model="player.active"  ng-click="enablePlayer(player)"  ng-checked="{{player.active}}" toggle-class="toggle-balanced " class="toggle-special" >
+			<div class="cold col-5 item-avatar" ><img src="img/badlandicon1.gif"></div>	
+	    	<h2 class="list-h2">{{player.player_name}}</h2>
+
+	    </ion-toggle> 
+
+
+ 
+ 
+  </ion-item>
+</ion-list>
+ 
+       
+    </ion-content>
+</ion-view>

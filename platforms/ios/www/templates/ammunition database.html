@@ -1,0 +1,191 @@
+<style>
+#myInput {
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 100%; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+ 
+#myInput:after {
+  content: "\f087"; 
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  position: absolute;
+  font-size: 400px;
+  color: lightblue;
+  top: 50%;
+  left: 50%;
+  margin: -300px 0 0 -200px;
+  z-index: 1;
+}
+
+    .opac1 {
+   
+    opacity: 0.5;
+ 
+}
+    .opac2 {
+   
+    opacity: 0.3;
+ 
+}
+
+    .opac3 {
+   
+    opacity: 0.1;
+ 
+}
+
+/*
+table {
+    border-collapse: collapse;
+}
+
+tr:nth-child(n + 13) {
+    visibility: hidden;
+}
+*/
+
+</style>
+
+<script>
+
+
+jQuery(document).ready(function () {
+
+  var  table, tr, td, i;
+ 
+  table = document.getElementById("table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+
+    if (i > 11)
+        tr[i].style.visibility = "hidden";
+
+  }
+
+});
+
+
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        tr[i].style.visibility = "visible";
+      } else {
+        tr[i].style.display = "none";
+        tr[i].style.visibility = "hidden";
+      }
+      
+    } 
+    //if (i > 12)
+      //  tr[i].style.visibility = "hidden";
+    //if (i < 13)
+      //  tr[i].style.visibility = "visible";
+  }
+  console.log(filter.length);
+  if (filter.length == 0)
+    for (i = 0; i < tr.length; i++) {
+
+    if (i > 11)
+        tr[i].style.visibility = "hidden";
+
+    }
+}
+</script>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search your cartridge..">
+
+<table class="table table-striped" id="table">
+  <tr class="">
+    <th style="width:60%;">Cartridge</th>
+    <th style="width:40%;">Type</th>
+    <th style="width:40%;">Energy</th>
+  </tr>
+  <tr>
+    <td>.17 Aguila</td>
+    <td>Rifle</td>
+    <td>152</td>
+  </tr>
+  <tr>
+    <td>.17 Hornady Magnum Rimfire</td>
+    <td>Rifle</td>
+    <td>246</td>
+  </tr>
+  <tr>
+    <td>.17 Mach 2</td>
+    <td>Rifle</td>
+    <td>163</td>
+  </tr>
+  <tr>
+    <td>.17 Remington</td>
+    <td>Rifle</td>
+    <td>877</td>
+  </tr>
+  <tr>
+    <td>.22 Hornet</td>
+    <td>Rifle</td>
+    <td>706</td>
+  </tr>
+  <tr>
+    <td>.22 Long</td>
+    <td>Rifle</td>
+    <td>52</td>
+  </tr>
+  <tr>
+    <td>.22 LR</td>
+    <td>Rifle</td>
+    <td>99</td>
+  </tr>
+  <tr>
+    <td>9mm Luger</td>
+    <td>handgun</td>
+    <td>357</td>
+  </tr>
+  <tr class="opac1">
+    <td>7.62x39mm Russian</td>
+    <td>rifle</td>
+    <td>1587</td>
+  </tr>
+  <tr class="opac2">
+    <td>.380 Auto</td>
+    <td>handgun</td>
+    <td>194</td>
+  </tr>
+  <tr class="opac3">
+    <td>.380 Auto</td>
+    <td>handgun</td>
+    <td>194</td>
+  </tr>
+  <tr class="">
+    <td>.223 Remington (5.56x45mm NATO)</td>
+    <td>rifle</td>
+    <td>1254</td>
+  </tr>
+  <tr class="">
+    <td>.225 Winchester</td>
+    <td>rifle</td>
+    <td>1556</td>
+  </tr>
+
+
+
+  
+</table>

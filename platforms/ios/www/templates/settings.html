@@ -1,0 +1,52 @@
+<ion-view title="Settings" id="page4">
+    <ion-content padding="true" class="has-header">
+        <form id="settings-form3" class="list">
+            <!--<ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle2">Designate yourself as host</ion-toggle>
+            
+            <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle2">Show Games</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle2">Show custom games/drills</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle1" name="Drills">Show LE/Military Drills</ion-toggle>-->
+            <div class="item range">
+            <div>LED brightness:  {{updatedValue}}% </div>
+  <i class="icon ion-ios-sunny-outline"></i>
+  <input type="range" name="brightness" min="0" max="100"  ng-model="rangeValue" on-release="drag(rangeValue)" ng-change="">
+  <i class="icon ion-ios-sunny"></i>
+</div>
+
+
+<ion-toggle toggle-class="toggle-positive" ng-model="idle_blink" ng-click="toggle_idle_blink(idle_blink)" ng-checked="{{idle_blink}}" id="settings-toggle2">Enable idle blink</ion-toggle>
+
+
+   <div class="item "> 
+      
+      <button id="gamesDrills-button1" ng-click="clearTargetList()" class="button button-positive   button-block"> 
+      <i class="icon ion-ios-keypad-outline"></i> Clear target list
+    </button>
+
+    {{msg}}
+  
+  </div>
+
+   <div class="item "> 
+      
+      <button id="gamesDrills-button1" ng-click="restartGameScript()" class="button button-assertive   button-block"> 
+      <i class="icon ion-refresh"></i> Restart basestation
+    </button>
+
+    {{restart_msg}}
+  
+  </div>
+
+
+        </form>
+ 
+        
+     
+
+
+
+
+
+
+    </ion-content>
+</ion-view>

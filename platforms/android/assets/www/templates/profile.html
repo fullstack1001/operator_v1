@@ -1,0 +1,72 @@
+<ion-view title="Player Profiles" id="profile" ng-controller="profileController as vm">
+  <link rel="stylesheet" type="text/css" href="./css/profile.css">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+  <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="item item-divider">
+      <i class="ion-information-circled"> Add a player </i>
+    </div>
+    <div class="item item-text-wrap ">
+      <label class="item item-input">
+        <span class="input-label">Username</span>
+        <input type="text" ng-model="username" ng-change="getUserName(username)">
+      </label>
+      <button class="button button-full button-positive" ng-click="vm.addUser()">
+        Add player
+      </button>
+      {{msg_due}}
+    </div>
+    <div class="item item-divider">
+      <i class="ion-information-circled"> Active players</i>
+    </div>
+    <div class="item item-text-wrap ">
+    <p> Marking players as inactive removes players from the player selection pool when setting up a game or training scenario.</p>
+    <ion-list>
+      <ion-item ng-repeat="player in players track by $index">
+        <ion-toggle ng-model="player.active" ng-click="enablePlayer(player)" ng-checked="{{player.active}}" toggle-class="toggle-balanced " class="toggle-special">
+          <div class="cold col-5 item-avatar"><i class="icon ion-person"></i> {{player.player_name}}</div>
+        </ion-toggle>
+      </ion-item>
+    </ion-list>
+    </div>
+
+
+
+
+    <div class="item item-divider" ng-show="commercialDisplay">
+      <i class="ion-information-circled"> Manage Events </i>
+    </div>
+    <div class="item item-text-wrap " ng-show="commercialDisplay">
+      <label class="item item-input">
+        <span class="input-label">Event</span>
+        <input type="text" ng-model="event" ng-change="getEventName(event)">
+      </label>
+      <button class="button button-full button-positive" ng-click="vm.addEvent()">
+        Add event
+      </button>
+      {{msg_event}}
+    </div>
+    <div class="item item-divider" ng-show="commercialDisplay">
+      <i class="ion-information-circled"> Select an event to be a default option in game selection</i>
+    </div>
+    <div class="item item-text-wrap " ng-show="commercialDisplay">
+      <p>     </p>
+      <ion-list>
+        <ion-item ng-repeat="event in events track by $index">
+          <ion-toggle ng-model="event.default" ng-click="enableEvent(event)" ng-checked="{{event.default}}" toggle-class="toggle-balanced " class="toggle-special">
+            <div class="cold col-5 item-avatar"><i class="icon ion-compass"></i> {{event.name}}</div>
+          </ion-toggle>
+        </ion-item>
+      </ion-list>
+    </div>
+
+
+
+
+  </ion-content>
+</ion-view>

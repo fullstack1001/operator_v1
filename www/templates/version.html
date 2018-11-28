@@ -1,0 +1,97 @@
+<ion-view title="Version History" id="version">
+  <style>
+    .agreement li{margin-left: 10px;list-style: initial; text-indent: 20px;list-style-position: inside;color: #666;
+      font-size: 14px;
+      margin-bottom: 2px;}
+
+  </style>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+        <div class="item item-divider">
+            <i class="ion-information-circled"> Mobile App Version 2.2.6 </i>
+        </div>
+        <div class="item item-text-wrap ">
+            <p>Mobile App Updates</p><br/>
+            <p>
+            
+            <ul>
+              <li>- Oct 2, 2018</li>
+              <li>- Updated LED brightness slider to work on all positions</li>
+              <li>- Updated idle blink toggle to simulate game when enabled</li>
+              <li>---------------------</li>
+              <li>- Aug 2nd, 2018</li>
+              <li>- Added up counter to Overrun and Run N Gun</li>
+              <li>- Added 'hit factor' scoring. Hit factor is scored as hits/time.</li>
+              <li>- Updated Manual Control interface</li>
+              <li>- Updated score history display</li>
+              <li>- Miscellaneous stability fixes</li>
+              <li>---------------------</li>
+              <li>- June 30, 2018</li>
+              <li>- Added restart controls for PvP and Run N Gun</li>
+              <li>- Added leaderboard controls on score screen</li>
+              <li>---------------------</li>
+              <li>- June 8, 2018</li>
+              <li>- App saves game modifier settings between games and drills</li>
+              <li>- Simplified game/drill configuration steps</li>
+              <li>---------------------</li>
+              <li>- May 1, 2018</li>
+              <li>- Updated communications between app and basestation. </li>
+              <li>---------------------</li>
+              <li>- April 4, 2018</li>
+              <li>- App runs more efficiently, removed deprecated features. </li>
+              <li>---------------------</li>
+              <li>- Feb 11, 2018</li>
+              <li>- Added additional game modifer to Swarm - Target Timeout Time. This option adjusts the amount of time before an active target times out.  </li>
+              <li>- Added additional game modifier to Swarm - Total misses allowed. Once misses reaches value selected, game ends </li>
+              <li>- Updated menu system on Games and Drills screen. </li>
+              <li>- Added Events management for venue accounts. </li>
+              <li>- Added player list to game screen for venue accounts. </li>
+              <li>---------------------</li>
+              <li>- Jan 24, 2018</li>
+              <li>- Added Mozambique option to Manual Control</li>
+              <li>---------------------</li>
+              <li>- Updated reporting on score screen</li>
+              <li>- Updated color display for Marksman and Race </li>
+              <li>- Updated Manual Control game screen for faster target manipulation and to help train shoot/no shoot scenarios.  </li>
+              <li>- - Three color presenation options for Manual Control. Green is non-threat - no shoot.  Red is a threat. All red targets should be shot. Yellow is a potential threat and a no shoot, but shooter should keep awareness of yellow in case it turns red and becomes a threat. Shooter is scored on pass/fails for each target. </li>
+ 
+              <li>- Fixed non-responsive "Stop" button on game screen </li>
+ 
+              <li>- Added group times in real time hit log on game screen </li>
+              <li>- Manual Control features added for support of custom drills</li>
+              <li>- Updated ountdown to beep 3 times<li>
+              <li>- Updated game modifier defaults<li>
+              <li>- Updated score results for Marksman<li>
+              <li>- Added new point based interface to Marksman game</li>
+              <li>- Updated Overrun game interface to more clearly display live results and streak information</li>
+              <li>- Updated live hit logger to display hit data as draw, split and total</li>
+            </ul>
+            </p>
+             
+            <br/>
+         
+        </div>
+
+
+
+      <div class="item item-divider">
+            <i class="ion-information-circled"> Basestation - Current Version {{current_version}} </i>
+        </div>
+        <div class="item item-text-wrap ">
+            <p>Version history</p><br/>
+            <p>
+         
+             <div ng-bind-html="basestation_version_description" ></div>
+            </p>
+             
+            <br/>
+         
+        </div>
+         
+    </ion-content>
+</ion-view>

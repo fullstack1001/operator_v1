@@ -1,0 +1,34 @@
+<ion-nav-bar>
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+
+
+
+<ion-view title="Battery levels" id="page4">
+
+  <div class="bar bar-subheader bar-light">
+      <h1 class="title"> Battery levels</h1>
+      <div ng-show="base_msg_window">
+        <button ng-click="base_msg_click()" class="button button-outline button-assertive" ><span  class="ion-wifi " style=";color:#ef473a;float:left;padding-right:18px;"> {{base_msg_data}}</span>
+        </button>
+      </div>
+</div>
+    <ion-content padding="true" class="has-header has-subheader">
+
+
+ 
+        <div class="list card" id="diagnostics-card22">
+            <ion-list id="diagnostics-list3" ng-repeat="item in items">
+
+                <ion-item class="item-icon-right" id="diagnostics-list-item16" ng-click="pingTarget({{item.id}})">
+                    <span class="item-icon-left" style="float:left;padding-left:35px;"><i class="icon ion-android-locate"></i>Target {{item.id}}</span>
+                    <span class="item-note" style="float:left; color:green;opacity:0.5;font-size:80%;"> &nbsp;&nbsp;{{item.online_msg}}</span>
+                    <span class="item-note">{{item.volt_percent}}</span>
+                    <i class="icon {{item.battery_icon}}"></i>
+                </ion-item>   
+ 
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

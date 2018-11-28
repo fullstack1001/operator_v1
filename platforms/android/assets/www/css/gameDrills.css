@@ -1,0 +1,69 @@
+/*  gameDrills.css, FOR: gameDrills.html and gameController.js  */
+.playername {
+  font-family: helvetica neue;
+  font-size: 120%;
+  font-style: italic;
+  font-weight: bold;
+}
+/*.item {padding:1px;}*/
+
+.ion-ios-help-outline {
+  font-size: 160%;
+}
+.msg_bar_red_bg
+{
+  background-color:rgba(250,48,48,0.5) !important;
+}
+ 
+. {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.item item-input { border-top:1px solid #ddd; }
+.card .item:first-child, .list-inset .item:first-child, .padding > .list .item:first-child
+ { border-top:1px solid #ddd; }
+.button-clear {
+  padding: 0px 5px 0px 0;
+}
+
+.popup-container .popup {
+  width: 350px;
+}
+
+.popup-body label {
+  font-size: 150% !important;
+}
+
+.popup-title {
+  font-size: 130%;
+}
+
+.popup-buttons {
+  min-height: 86px
+}
+
+.item-content {
+  font-size: 120% !important
+}
+
+@font-face {
+  font-family: 'Impact';
+  src:
+      url('Impact.eot') format('embedded-opentype'),
+      url('Impact.woff2') format('woff2'),
+      url('Impact.woff') format('woff'),
+      url('Impact.ttf') format('truetype'),
+      url('Impact.svg#Impact') format('svg');
+}
+
+.button-positive,
+.button-default {
+  font-size: 180%;
+}
+.gametitle{
+  font-size:3em;
+  padding:30px 14px;
+  text-transform: uppercase;
+  font-family: Impact;
+}

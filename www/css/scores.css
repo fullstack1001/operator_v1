@@ -1,0 +1,212 @@
+/*  scores.css, FOR: scores.html  */
+/*  scores.css, FOR: scores.html  */
+.message{
+  color:#ef473a;
+  float:left;
+  padding-right:18px;
+}
+.newh2 {
+  font-family: 'helvetica neue';
+  font-size: 24px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+
+.shot_or_group_time_class
+{font-size:50%;padding-top:40px;}
+
+.shot_or_group_time_class_lg
+{font-size:4vw;padding-top:40px;}
+
+
+.col-score-2 {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: #323232;
+  margin: 5px;
+  margin-left: 0px;
+  color: white;
+  font-family: helvetica neue;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.i {
+  font-style: italic;
+}
+
+.colh {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: rgb(221, 221, 221);
+  margin: 5px;
+  color: #323232;
+  font-family: helvetica neue;
+  font-size: 260%;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 120%;
+}
+
+.coli {
+  width: 100%;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: rgb(221, 221, 221);
+  margin: 5px;
+  color: #323232;
+  font-family: helvetica neue;
+  font-size: 260%;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 120%;
+}
+
+.col-score {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: rgb(221, 221, 221);
+  margin: 0 0 5px 5px;
+  color: #323232;
+  font-family: helvetica neue;
+  font-size: 120%;
+}
+
+.col-dark {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(221, 221, 221);
+  border-radius: 6px;
+  background: #444444;
+  margin: 0 0 5px 5px;
+  color: #ffffff;
+  font-family: helvetica neue;
+  font-size: 120%;
+}
+
+.playername {
+  font-family: helvetica neue;
+  font-size: 160%;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.balanced {
+  border-color: #28a54c;
+  background-color: #33cd5f;
+}
+
+.balanced-text {
+  color: #28a54c;
+  font-size: 80%;
+}
+
+.stable {
+  border-color: #b2b2b2;
+  background-color: #f8f8f8;
+  color: #222;
+}
+
+.ion-alert-circled {
+  line-height: inherit;
+  font-size: 45px !important;
+}
+
+.ion-gear-a {
+  line-height: inherit;
+  font-size: 45px !important;
+}
+
+.tabs {
+  background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 95%, transparent 0%);
+}
+
+.tabs {
+  background-image: none !important;
+}
+
+.tab-item {
+  opacity: 1;
+  font-size: 40px;
+}
+
+.ion-pinpoint:before {
+  font-size: 120%;
+}
+
+.ion-ios-people:before {
+  font-size: 120%;
+}
+
+.gametitle {
+  font-family: impact;
+  text-transform: uppercase;
+  font-style: normal;
+  font-size: 200%;
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'Impact';
+  src:
+      url('Impact.eot') format('embedded-opentype'),
+      url('Impact.woff2') format('woff2'),
+      url('Impact.woff') format('woff'),
+      url('Impact.ttf') format('truetype'),
+      url('Impact.svg#Impact') format('svg');
+}
+
+.filltext {
+  text-align: center;
+  width: 100%;
+  font-size: 16vw;
+  overflow:hidden;
+  line-height: 16vw;
+
+}
+
+.filltext_gamename {
+  text-align: left;
+  width: 100%;
+  font-size: 4vmax;
+}
+
+.past-game-button {
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.forcestyle {
+  padding: 16px !important;
+  margin: 5px 4px !important;
+}
+
+.col-25 {
+  font-size: 75%;
+  line-height: 15px
+}

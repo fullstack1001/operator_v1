@@ -1,0 +1,421 @@
+<ion-view title="Drill Builder" id="buildrange" ng-controller="buildRangeCtrl as vm">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+  <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+
+<style>
+
+.button-positive,
+.button-default {
+  font-size: 130%;
+}
+
+	          	.target { width:29%;margin:10px;float:left;height:125px; }
+	          	.target-button {float:left;width:99%;height:113px}
+	          	.button-small { min-width: 30px; min-height: 30px; float:right; margin:2px;}
+	          	.active-small-button { min-width: 50px; min-height: 30px; }
+	          	.inactive-small-button {min-width: 30px; min-height: 30px; }
+	          	.add-sequence{float:left;min-height: 25px;height:25px !important; min-width:25px !important;font-size:15px;line-height: 15px;padding-top:0;}
+	          	.set_when {max-width: 100% !important; font-size: 13px !important;}
+	          	.when {border:0px;float:left;width:99%; height:30px; display: none;}
+	          	.display_drop {display: block;}
+	          </style>
+
+ 
+  
+ 
+
+    <div class="list" >
+        <div class="item item-divider item-text-wrap gametitle">New Drill</div>
+        <div class="item item-text-wrap">
+            <label class="item item-input">
+            <span class="input-label">Drill name</span>
+            <input type="text" ng-model="username" placeholder="Warmup Round 1">
+          </label> 
+
+
+          <label class="item item-input">
+            <span class="input-label">Instruction</span>
+            <input type="text" ng-model="username" placeholder="Mozambique from 7 feet away">
+          </label> 
+        </div>
+    </div>
+   
+
+
+    <div class="list" >
+
+
+
+    		<!------  11111111 -------->
+        	<div class="item item-divider item-text-wrap gametitle">Sequence 1</div>
+
+	        <div class="item item-text-wrap">
+
+	        	<div style="padding-bottom: 15px;">
+		          	<div style="width:150px;float:left;padding-top:25px;"><strong>Activate Targets</strong></div> 
+		          	<div style="width:50%;float:left;" class="input-label">
+				      	<label class="item item-input item-select " style="border:0px;width:290px" >
+				         <button style="width:150px;float:left;" ion-button class="button button-stable" ng-class="activate_timeout_button[0]" ng-click="activate_timeout(0)">with timeout</button>
+				          	<select ng-model="set_timeout" ng-change="updateTimeout(set_timeout,0)" ng-options="s.name for s in timeout_selection " style="font-size:16px;"></select>
+				        </label>
+				    </div>
+				    <div style="clear:both;"></div>
+	        	</div>
+	        	<div style="padding-bottom: 15px;">
+	        		<div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['00']" ng-click="activateTarget(0,0)" >1</button>
+			            <label class="item item-input item-select when" ng-class="show_when['00']">
+				          	<select ng-model="set_when[0]" ng-change="updateWhen(set_when[0], 0, 0)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['01']" ng-click="activateTarget(1,0)" >2</button>
+			            <label class="item item-input item-select when" ng-class="show_when['01']">
+				          	<select ng-model="set_when[1]" ng-change="updateWhen(set_when[1], 0, 1)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['02']" ng-click="activateTarget(2,0)" >3</button>
+			            <label class="item item-input item-select when" ng-class="show_when['02']">
+				          	<select ng-model="set_when[2]" ng-change="updateWhen(set_when[2], 0, 2)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['03']" ng-click="activateTarget(3,0)" >4</button>
+			            <label class="item item-input item-select when" ng-class="show_when['03']">
+				          	<select ng-model="set_when[3]" ng-change="updateWhen(set_when[3], 0, 3)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['04']" ng-click="activateTarget(4,0)" >5</button>
+			            <label class="item item-input item-select when" ng-class="show_when['04']">
+				          	<select ng-model="set_when[4]" ng-change="updateWhen(set_when[4], 0, 4)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['05']" ng-click="activateTarget(5,0)" >6</button>
+			            <label class="item item-input item-select when" ng-class="show_when['05']">
+				          	<select ng-model="set_when[5]" ng-change="updateWhen(set_when[5], 0, 5)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['06']" ng-click="activateTarget(6,0)" >7</button>
+			            <label class="item item-input item-select when" ng-class="show_when['06']">
+				          	<select ng-model="set_when[6]" ng-change="updateWhen(set_when[6], 0, 6)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['07']" ng-click="activateTarget(7,0)" >8</button>
+			            <label class="item item-input item-select when" ng-class="show_when['07']">
+				          	<select ng-model="set_when[7]" ng-change="updateWhen(set_when[7], 0, 7)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['08']" ng-click="activateTarget(8,0)" >9</button>
+			            <label class="item item-input item-select when" ng-class="show_when['08']">
+				          	<select ng-model="set_when[8]" ng-change="updateWhen(set_when[8], 0, 8)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+
+
+
+			   
+		 
+		      
+		        </div>
+		        <div style="padding-bottom: 15px;width:50%;float:left;" class="input-label">
+		      		<label class="item item-input item-select when">
+			          	When
+			          	<select ng-model="set_when" ng-change="updateWhen(set_when,0)" ng-options="s.name for s in when_selection " class="set_when"></select>
+			        </label>
+	        	</div>
+		        <div style="padding-bottom: 15px;width:50%;float:right;padding-right:20px;">
+			        
+			        
+			        
+			        
+			        <button ion-button class="button button-royal button-small"  ng-class="purple_button" ng-click="changeColor('button-royal')">r</button>
+			        <button ion-button class="button button-positive button-small"  ng-class="blue_button" ng-click="changeColor('button-positive')" style="font-size:12px">o</button>
+			        <button ion-button class="button button-balanced button-small"  ng-class="green_button" ng-click="changeColor('button-balanced')">l</button>
+			        <button ion-button class="button button-energized button-small" ng-class="yellow_button" ng-click="changeColor('button-energized')">o</button>
+			        <button ion-button class="button button-assertive button-small button-border"  ng-class="red_button" ng-click="changeColor('button-assertive')">c</button>
+	        	</div>
+			    <div style="clear:both;"></div>
+
+	    	</div>
+	    	<div class="list" ng-show="showSequence2button">
+		        <div class="item item-divider item-text-wrap gametitle"><button ion-button class="button button-dark button-small add-sequence"  ng-class="" ng-click="add_sequence(2)" >+</button>Add sequence 2</div>
+			</div>
+
+
+
+			<!------  22222222 -------->
+			<div ng-show="showSequence2" class="item item-divider item-text-wrap gametitle">Sequence 2</div>
+	        <div ng-show="showSequence2" class="item item-text-wrap">
+	        	<div style="padding-bottom: 15px;">
+		          	<div style="width:150px;float:left;padding-top:25px;"><strong>Activate Targets</strong></div> 
+		          	<div style="width:50%;float:left;" class="input-label">
+				      	<label class="item item-input item-select " style="border:0px;width:290px" >
+				         <button style="width:150px;float:left;" ion-button class="button button-stable" ng-class="activate_timeout_button[1]" ng-click="activate_timeout(1)">with timeout</button>
+				          	<select ng-model="set_timeout" ng-change="updateTimeout(set_timeout,1)" ng-options="s.name for s in timeout_selection " style="font-size:16px;"></select>
+				        </label>
+				    </div>
+				    <div style="clear:both;"></div>
+	        	</div>
+	        	<div style="padding-bottom: 15px;">
+
+
+		            
+		            <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['10']" ng-click="activateTarget(0,1)" >1</button>
+			            <label class="item item-input item-select when" ng-class="show_when['10']">
+				          	<select ng-model="set_when[0]" ng-change="updateWhen(set_when[0], 1, 0)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['11']" ng-click="activateTarget(1,1)" >2</button>
+			            <label class="item item-input item-select when" ng-class="show_when['11']">
+				          	<select ng-model="set_when[1]" ng-change="updateWhen(set_when[1], 1, 1)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['12']" ng-click="activateTarget(2,1)" >3</button>
+			            <label class="item item-input item-select when" ng-class="show_when['12']">
+				          	<select ng-model="set_when[2]" ng-change="updateWhen(set_when[2], 1, 2)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['13']" ng-click="activateTarget(3,1)" >4</button>
+			            <label class="item item-input item-select when" ng-class="show_when['13']">
+				          	<select ng-model="set_when[3]" ng-change="updateWhen(set_when[3], 1, 3)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['14']" ng-click="activateTarget(4,1)" >5</button>
+			            <label class="item item-input item-select when" ng-class="show_when['14']">
+				          	<select ng-model="set_when[4]" ng-change="updateWhen(set_when[4], 1, 4)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['15']" ng-click="activateTarget(5,1)" >6</button>
+			            <label class="item item-input item-select when" ng-class="show_when['15']">
+				          	<select ng-model="set_when[5]" ng-change="updateWhen(set_when[5], 1, 5)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['16']" ng-click="activateTarget(6,1)" >7</button>
+			            <label class="item item-input item-select when" ng-class="show_when['16']">
+				          	<select ng-model="set_when[6]" ng-change="updateWhen(set_when[6], 1, 6)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['17']" ng-click="activateTarget(7,1)" >8</button>
+			            <label class="item item-input item-select when" ng-class="show_when['17']">
+				          	<select ng-model="set_when[7]" ng-change="updateWhen(set_when[7], 1, 7)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['18']" ng-click="activateTarget(8,1)" >9</button>
+			            <label class="item item-input item-select when" ng-class="show_when['18']">
+				          	<select ng-model="set_when[8]" ng-change="updateWhen(set_when[8], 1, 8)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+		        </div>
+		        <div style="padding-bottom: 15px;width:50%;float:left;" class="input-label">
+		      		<label class="item item-input item-select when" >
+			          	When
+			          	<select ng-model="set_when" ng-change="updateWhen(set_when, 1)" ng-options="s.name for s in when_selection " class="set_when"></select>
+			        </label>
+	        	</div>
+		        <div style="padding-bottom: 15px;width:50%;float:right;padding-right:20px;">
+			        <button ion-button class="button button-royal button-small"  ng-class="purple_button" ng-click="changeColor('button-royal')">r</button>
+			        <button ion-button class="button button-positive button-small"  ng-class="blue_button" ng-click="changeColor('button-positive')" style="font-size:12px">o</button>
+			        <button ion-button class="button button-balanced button-small"  ng-class="green_button" ng-click="changeColor('button-balanced')">l</button>
+			        <button ion-button class="button button-energized button-small" ng-class="yellow_button" ng-click="changeColor('button-energized')">o</button>
+			        <button ion-button class="button button-assertive button-small button-border"  ng-class="red_button" ng-click="changeColor('button-assertive')">c</button>
+	        	</div>
+			    <div style="clear:both;"></div>
+
+	    	</div>
+
+	    	<div class="list" ng-show="showSequence3button">
+		        <div class="item item-divider item-text-wrap gametitle"><button ion-button class="button button-dark button-small add-sequence"  ng-class="" ng-click="add_sequence(3)" >+</button>Add sequence 3</div>
+			</div>
+
+			<!------  33333333 -------->
+			<div ng-show="showSequence3" class="item item-divider item-text-wrap gametitle">Sequence 3</div>
+	        <div ng-show="showSequence3" class="item item-text-wrap">
+	        	<div style="padding-bottom: 15px;">
+		          	<div style="width:150px;float:left;padding-top:25px;"><strong>Activate Targets</strong></div> 
+		          	<div style="width:50%;float:left;" class="input-label">
+				      	<label class="item item-input item-select " style="border:0px;width:290px" >
+				         <button style="width:150px;float:left;" ion-button class="button button-stable" ng-class="activate_timeout_button[2]" ng-click="activate_timeout(2)">with timeout</button>
+				          	<select ng-model="set_timeout" ng-change="updateTimeout(set_timeout,2)" ng-options="s.name for s in timeout_selection " style="font-size:16px;"></select>
+				        </label>
+				    </div>
+				    <div style="clear:both;"></div>
+	        	</div>
+	        	<div style="padding-bottom: 15px;">
+
+
+	        		<div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['20']" ng-click="activateTarget(0,2)" >1</button>
+			            <label class="item item-input item-select when" ng-class="show_when['20']">
+				          	<select ng-model="set_when[0]" ng-change="updateWhen(set_when[0], 2, 0)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['21']" ng-click="activateTarget(1,2)" >2</button>
+			            <label class="item item-input item-select when" ng-class="show_when['21']">
+				          	<select ng-model="set_when[1]" ng-change="updateWhen(set_when[1], 2, 1)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['22']" ng-click="activateTarget(2,2)" >3</button>
+			            <label class="item item-input item-select when" ng-class="show_when['22']">
+				          	<select ng-model="set_when[2]" ng-change="updateWhen(set_when[2], 2, 2)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['23']" ng-click="activateTarget(3,2)" >4</button>
+			            <label class="item item-input item-select when" ng-class="show_when['23']">
+				          	<select ng-model="set_when[3]" ng-change="updateWhen(set_when[3], 2, 3)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['24']" ng-click="activateTarget(4,2)" >5</button>
+			            <label class="item item-input item-select when" ng-class="show_when['24']">
+				          	<select ng-model="set_when[4]" ng-change="updateWhen(set_when[4], 2, 4)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['25']" ng-click="activateTarget(5,2)" >6</button>
+			            <label class="item item-input item-select when" ng-class="show_when['25']">
+				          	<select ng-model="set_when[5]" ng-change="updateWhen(set_when[5], 2, 5)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['26']" ng-click="activateTarget(6,2)" >7</button>
+			            <label class="item item-input item-select when" ng-class="show_when['26']">
+				          	<select ng-model="set_when[6]" ng-change="updateWhen(set_when[6], 2, 6)" ng-options="s.name for s in when_selection " class="set_when" ></select>
+				        </label>
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['27']" ng-click="activateTarget(7,2)" >8</button>
+			            <label class="item item-input item-select when" ng-class="show_when['27']">
+				          	<select ng-model="set_when[7]" ng-change="updateWhen(set_when[7], 2, 7)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+			        <div class="target ">
+			            <button ion-button class="button target-button button-stable" ng-class="target_color_arr['28']" ng-click="activateTarget(8,2)" >9</button>
+			            <label class="item item-input item-select when" ng-class="show_when['28']">
+				          	<select ng-model="set_when[8]" ng-change="updateWhen(set_when[8], 2, 8)" ng-options="s.name for s in when_selection " class="set_when"></select>
+				        </label> 
+			        </div>
+
+ 
+		        </div>
+		        <div style="padding-bottom: 15px;width:50%;float:left;" class="input-label">
+		      		<label class="item item-input item-select when">
+			          	When
+			          	<select ng-model="set_when" ng-change="updateWhen(set_when, 2)" ng-options="s.name for s in when_selection " class="set_when"></select>
+			        </label>
+	        	</div>
+		        <div style="padding-bottom: 15px;width:50%;float:right;padding-right:20px;">
+			        <button ion-button class="button button-royal button-small"  ng-class="purple_button" ng-click="changeColor('button-royal')">r</button>
+			        <button ion-button class="button button-positive button-small"  ng-class="blue_button" ng-click="changeColor('button-positive')" style="font-size:12px">o</button>
+			        <button ion-button class="button button-balanced button-small"  ng-class="green_button" ng-click="changeColor('button-balanced')">l</button>
+			        <button ion-button class="button button-energized button-small" ng-class="yellow_button" ng-click="changeColor('button-energized')">o</button>
+			        <button ion-button class="button button-assertive button-small button-border"  ng-class="red_button" ng-click="changeColor('button-assertive')">c</button>
+	        	</div>
+			    <div style="clear:both;"></div>
+
+	    	</div>
+
+	    	<div class="list" ng-show="showSequence4button">
+		        <div class="item item-divider item-text-wrap gametitle"><button ion-button class="button button-dark button-small add-sequence"  ng-class="" ng-click="add_sequence(4)" >+</button>Add sequence 4</div>
+			</div>
+
+ 
+
+ 			
+		<div ng-show="simulated_experience" class="item item-text-wrap">Current sequence: {{ current_sequence }}
+ 			<div style="padding-bottom: 15px;">
+ 			 
+		            <button ion-button class="button target button-stable" ng-class="target_sim[0]" ng-click="hitTarget(0)">1</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[1]" ng-click="hitTarget(1)">2</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[2]" ng-click="hitTarget(2)">3</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[3]" ng-click="hitTarget(3)">4</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[4]" ng-click="hitTarget(4)">5</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[5]" ng-click="hitTarget(5)">6</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[6]" ng-click="hitTarget(6)">7</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[7]" ng-click="hitTarget(7)">8</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[8]" ng-click="hitTarget(8)">9</button>
+		            <button ion-button class="button target button-stable" ng-class="target_sim[9]" ng-click="hitTarget(9)">10</button>
+		    </div>
+		</div>
+
+
+
+
+
+
+    <div style="width: 100%; padding: 40px;">
+    	<button id="clearTargetList" ng-click="saveDrill()" class="button button-positive   " style="float:right;display:block;" >
+		         Save Drill
+		      </button><!--
+		<button id="clearTargetList" ng-click="" class="button button-positive   " style="float:right;display:block;margin-right:10px;" >
+		         Run Drill
+		      </button>-->
+ 
+	</div>
+
+<!--
+
+	<div>
+		<div class="item "> 
+			<div style="float:left;width:55%;line-height:59px;">{{msg}}</div>
+			<div  style="float:left;width:45%">
+		      	 Test Lights
+		       	<button id="clearTargetList" ng-click="redlights()" class="button button-positive ">
+		          red
+		      	</button>
+
+		  		<button id="clearTargetList" ng-click="greenlights()" class="button button-positive ">
+		          green
+		      	</button>
+
+		    	<button id="clearTargetList" ng-click="bluelights()" class="button button-positive ">
+		          blue
+		      	</button>
+
+		      	<button id="clearTargetList" ng-click="cycle()" class="button button-positive ">
+		          Infinite color cycle loop
+		      	</button>
+		    </div>
+		  </div>
+ 
+      
+    </div>
+-->
+  </ion-content>
+</ion-view>

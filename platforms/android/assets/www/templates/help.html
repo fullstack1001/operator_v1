@@ -1,0 +1,303 @@
+<ion-view title="Getting Started" id="settings">
+  <style>
+    .list .item.item-accordion {
+      transition: 0.09s all linear;
+      overflow: initial!important;
+      white-space: initial!important;
+    }
+
+    .item-stable {
+      padding: 10px;
+    }
+
+    .list .item.item-accordion.ng-hide {
+      line-height: 0px;
+    }
+
+    .list .item.item-accordion.ng-hide-add,
+    .list .item.item-accordion.ng-hide-remove {
+      display: block !important;
+    }
+
+  </style>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-arrow-left-c" ng-click="goBack()"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+
+  <h2>Basestation</h2>
+    <ion-list>
+      <ion-item class="item-stable" ng-click="toggleGroup('powertobase')">
+        <i class="icon item-divider" ng-class="isGroupShown('powertobase') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Powering on the basestation</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('powertobase')">
+        To turn the basestation on, simply press the button on top of the basestation case. One green LED will indicate power is on. After a minute or so, a second green LED will begin blinking once per second indicating that the network is up and it is ready
+        to connect to it from the mobile app.
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('wifipass')">
+        <i class="icon item-divider" ng-class="isGroupShown('wifipass') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;What is the Autonomous Alloys WiFi password?</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('wifipass')">
+        The password is 12345678
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('conndrop')">
+        <i class="icon item-divider" ng-class="isGroupShown('conndrop') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;iPhone/iPad drops WiFi connection</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('conndrop')">
+        If the iPhone drops while in a game, From Settings -> Wifi, Click the "i" icon for the AutonomousAlloysXXXXX wifi connection and toggle "Auto-Join" to On. If the WiFi connection continues to drop, go to Settings -> Cellular and toggle "Cellular Data" to Off.
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('chargetobase')">
+        <i class="icon item-divider" ng-class="isGroupShown('chargetobase') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Charging the basestation</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('chargetobase')">
+        The basestation comes included with a micro USB cable that can be charged from any USB charge port. A fully charged basestation will last at least 4.5 hours. If it is required to power your basestation longer, we recommend plugging it into a portable
+        power bank such as the inexpensive <a href="https://www.amazon.com/RAVPower-10400mAh-Technology-Smartphones-Black/dp/B00XC1WAQ6/ref=sr_1_17?s=wireless&ie=UTF8&qid=1484161440&sr=1-17&keywords=ravpower">RAVPower</a>.
+      </ion-item>
+    </ion-list>
+
+
+    <h2>Lumatic Target</h2>
+    <a href="https://www.youtube.com/watch?v=Gd71bWltM1o&t=10s&list=PLySDImh25M5IZr-MjbI4X3c1dip16a681&index=1">Lumatic Target Introduction Video</a>
+    <h2>Tapnetic Target</h2>
+    <ion-list>
+      <ion-item class="item-stable" ng-click="toggleGroup('shootdistance')">
+        <i class="icon  item-divider" ng-class="isGroupShown('shootdistance') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Safe shooting distances</i>
+      </ion-item>
+      <ion-item class="item-accordion" ng-show="isGroupShown('shootdistance')">
+        You can safely shoot at a distance of 8 yards from the Tapnetic targets. Always make sure the deflector and paddle surfaces are flat and even without any pits or maring. <strong>Always wear eye protection.</strong>
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('correctammo')">
+        <i class="icon  item-divider" ng-class="isGroupShown('correctammo') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Shooting the correct ammunition</i>
+      </ion-item>
+      <ion-item class="item-accordion" ng-show="isGroupShown('correctammo')">
+        Only shoot lead ammunition at Autonomous Alloys targets. Steel and bimetal ammunition can bounce back towards the shooter(s) and will pit and deform the deflector and paddle surfaces. The uniform and flat surface of the deflector and paddle is designed
+        to fragment and disperse the lead evenly. If the surfaces become pitted, there is a potential for the bullet or bullet fragments to loop back towards the shooter.
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('targeton')">
+        <i class="icon  item-divider" ng-class="isGroupShown('targeton') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Turning Tapnetic target on</i>
+      </ion-item>
+      <ion-item class="item-accordion" ng-show="isGroupShown('targeton')">
+        Before turning the Tapnetic target on, be sure the deflector is bolted in on both sides. Flip the power switch up and you will see the LED's light up white for a second. The target is now ready to be connected to the basestation.
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('chargebatts')">
+        <i class="icon  item-divider" ng-class="isGroupShown('chargebatts') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Charging the Tapnetic batteries</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('chargebatts')">
+        <p>This is one of the most important topics for users new to LiPo's so we'll cover some those topics here. Before removing a battery from the target chassis for charging, you will want to put on latex or similar shop gloves. The electronic/battery
+          housing collects lead dust. After you have gloves on, make sure the power is switched off, then take a 14 mm socket and remove the bolts holding the deflector in place. Once removed, open the deflector carefully. Unhook the battery from the
+          yellow XT-60 connector.</p>
+        <p> Now is a good time to wipe down the battery and internals with a disposable shop towel. </p>
+        <p>Plug the male end of the battery connector into the female end of your LiPo charger while the charger is plugged into your wall socket. Plug the balance charging cable, which is the 5-wire cable on the battery, into the appropriately sized female
+          balance port on the your charger. If you're using the Turnigy B4 charger supplied from Autonomous Alloys, the charger will beep after a few seconds inicating it has detected the battery and has started charging. The charging unit will beep again
+          when the charge is complete. </p>
+        <p>Note: Never charge LiPo batteries unattended. And if you do, ensure you are charging in a fire safe location.</p>
+
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('storingbatts')">
+        <i class="icon  item-divider" ng-class="isGroupShown('storingbatts') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Storing your batteries</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('storingbatts')">
+        <p>Always remove your LiPo batteries from the targets when they are not in use. Never leave your batteries plugged in for more than 24 hours, even when the target is turned off. LiPo batteries are finicky and require more attention than most other
+          battery chemistries. It is also recommended that you not store your batteries at full charge. There are optional charging systems in our store and available online that can discharge your batteries to a voltage level optimum for storing. </p>
+
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('replacinglights')">
+        <i class="icon  item-divider" ng-class="isGroupShown('replacinglights') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Replacing lights</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('replacinglights')">
+        <p>If an LED has been shot out, follow the steps for replacement. Using latex or similar shop gloves to prevent repeated lead exposure, switch the power off and unbolt the diffuser. Remove the steel shelf in front of the LEDs and set aside. Find
+          the release tab on the connector LED cable and while pressing in, disconnect the broken LED board from the LED cable.</p>
+        <p> Fit a new LED board on the LED cable's connector until you hear it positively lock. Gently fit the new LED board securely onto the LED shelf. It may be a tight fit, so fitting it in sideways at first may help. Re-fit the steel shelf in front of
+          the LED boards. Ensure all wiring is neat and out of the way, drop a new diffuser into the diffuser slot, then close the deflector ensuring none of the wiring is getting pinched.</p>
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('group5')">
+        <i class="icon item-divider" ng-class="isGroupShown('group5') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Field kit</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('group5')">
+        <p>The following items are required for your system to operate</p>
+        <ul>
+          <li> - Tapnetic targets </li>
+          <li> - Basestation</li>
+          <li> - Repeater</li>
+          <li> - Autonomous Alloys mobile app</li>
+          <li> - Target stands</li>
+          <li> - Charged LiPo batteries</li>
+        </ul>
+        <p>Things following items are essentials to include in your field kit</p>
+        <br/>
+        <ul>
+          <li> - Spare LiPo batteries </li>
+          <li> - Gorilla tape</li>
+          <li> - 14mm socket wrench</li>
+          <li> - Optional portable power bank to provide longer uptime for basestation. We recommend the "RAVPower 10400mAh" power bank available on Amazon</li>
+          <li> - Extra 9 volts</li>
+          <li> - Spare LED's and light diffusers</li>
+          <li> - latex gloves</li>
+          <li> - disposable shop towels</li>
+        </ul>
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('group4')">
+        <i class="icon item-divider" ng-class="isGroupShown('group4') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Game and Drill modes</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('group4')">
+        Unless otherwise noted, most game and drill modes will operate with two targets.
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('group3')">
+        <i class="icon item-divider" ng-class="isGroupShown('group3') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Troubleshooting</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('group3')">
+        Cannot find targets even though they are powered on - power cycle the base station.
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('group4')">
+        <i class="icon item-divider" ng-class="isGroupShown('group4') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Creating an airgap</i>
+      </ion-item>
+      <ion-item class="item-accordion" ng-show="isGroupShown('group4')">
+        stuff in side
+      </ion-item>
+    </ion-list>
+
+
+
+    <h2>General Tips</h2>
+    <ion-list>
+      <ion-item class="item-stable" ng-click="toggleGroup('fieldkit')">
+        <i class="icon item-divider" ng-class="isGroupShown('fieldkit') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Field kit</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('fieldkit')">
+        <p>The following items are required for your system to operate</p>
+        <ul>
+          <li> - Tapnetic targets </li>
+          <li> - Basestation</li>
+          <li> - Repeater</li>
+          <li> - Autonomous Alloys mobile app</li>
+          <li> - Target stands</li>
+        </ul>
+        <p>Things following items are essentials to include in your field kit</p>
+        <br/>
+        <ul>
+          <li> - Charged LiPo batteries </li>
+          <li> - Gorilla tape</li>
+          <li> - 14mm socket wrench</li>
+          <li> - Optional portable power bank to provide longer uptime for basestation</li>
+          <li> - Extra 9 volts</li>
+          <li> - Spare LED's and light diffusers</li>
+          <li> - latex gloves</li>
+          <li> - disposable shop towels</li>
+        </ul>
+      </ion-item>
+    </ion-list>
+
+    <h2>Mobile app</h2>
+
+    <ion-list>
+      <ion-item class="item-stable" ng-click="toggleGroup('connectdevice')">
+        <i class="icon item-divider" ng-class="isGroupShown('connectdevice') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Connecting a mobile device the base station</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('connectdevice')">
+        Once the basestation is on and the green LED is blinking once per second, go to the WiFi settings of your mobile device and connect to AutonomousAlloys network. Once connected, open the Autonomous Alloys app. The top of the main screen will tell you if
+        you are connected to the basestation.
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('targetstobase')">
+        <i class="icon item-divider" ng-class="isGroupShown('targetstobase') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Connecting Autonomous Alloys targets to the basestation</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('targetstobase')">
+        If you have the Tapnetic targets switched on before powering up the basestation, the basestation will automatically connect to the targets. If you have powered on the basestation before turning the targets on, then click the button "Discover targets" on
+        the home screen of the app. You will see the targets that you have turned on begin to connect in just a few seconds.
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('startagame')">
+        <i class="icon item-divider" ng-class="isGroupShown('startagame') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Starting a game</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('startagame')">
+        From the main horizontal menu in the app, click "Games &amp; Drills", then click "Choose Game or Drill". Selecting an option from the list will load the game attributes. You can leave the defaults selected or modify at your choosing. Clicking "Play" will
+        load the main game window. At the bottom of the game window you have a green start button and a red stop button. Pushing the green start button will initiate the countdown sequence and the game will begin.
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('mintarg')">
+        <i class="icon item-divider" ng-class="isGroupShown('mintarg') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Minimum target requirement</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('mintarg')">
+        Unless otherwise noted in the game menu of the app, most game and drill modes will operate with two targets.
+      </ion-item>
+    </ion-list>
+
+
+
+    
+
+    <h2>Repeater</h2>
+    <ion-list>
+      <ion-item class="item-stable" ng-click="toggleGroup('userepeater')">
+        <i class="icon item-divider" ng-class="isGroupShown('userepeater') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;How to use the repeater</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('userepeater')">
+        The repeater is used to relay RF signals from the basestation to the Autonomous Alloys targets. The repeater is required in most environments because RF signals cannot travel through steel. To position your repeater in the field, place it behind the targets
+        outside of the line of fire while ensuring it has a direct line of sight to the basestation. When placing it out of the line of fire, it is usually best to place it 10 yards or more to the left or right side of the targets.
+      </ion-item>
+
+      <ion-item class="item-stable" ng-click="toggleGroup('changerepeaterbatts')">
+        <i class="icon item-divider" ng-class="isGroupShown('changerepeaterbatts') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;When to change batteries</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('changerepeaterbatts')">
+        The repeater uses one 9 volt battery. The battery should last about 10 hours before needing replacement. A warning message box will appear in the mobile app if is not detecting a repeater in the network. This may be an indication that either the repeater
+        is not turned on or that the battery is dead.
+      </ion-item>
+    </ion-list>
+
+    <h2>Troubleshooting</h2>
+    <ion-list>
+      <ion-item class="item-stable" ng-click="toggleGroup('notinlist')">
+        <i class="icon item-divider" ng-class="isGroupShown('notinlist') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Targets aren't appearing in the list</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('notinlist')">
+        Ensure the targets are turned on. Ensure the repeater is turned on. Click "Discover Targets". If they still can't be found, turn the basestation off and back on.
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('warningmse')">
+        <i class="icon item-divider" ng-class="isGroupShown('warningmse') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Warning message that a repeater can't be found</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('warningmse')">
+        Ensure the repeater is turned on. Click "Discover targets". If it still isn't finding the repeater, replace the 9 volt battery.
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('lowbat')">
+        <i class="icon item-divider" ng-class="isGroupShown('lowbat') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Warning message about a low battery</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('lowbat')">
+        On the home screen, press "View battery levels". Find the target(s) in the list showing a low voltage. Press the target number to flash the light on the target with the low battery. Once target is identified, switch power off on the target and replace
+        with a fully charged battery.
+      </ion-item>
+      <ion-item class="item-stable" ng-click="toggleGroup('notresponding')">
+        <i class="icon item-divider" ng-class="isGroupShown('notresponding') ? 'ion-minus-circled' : 'ion-plus-circled'"> &nbsp;Basestation power LED on, but not responding</i>
+      </ion-item>
+      <ion-item class="item-accordion item-text-wrap" ng-show="isGroupShown('notresponding')">
+        Press and hold the power button for 10 seconds and allow the basestation to reboot.
+      </ion-item>
+    </ion-list>
+    <br/>
+    <!--
+<ion-list>
+  <div ng-repeat="group in groups">
+    <ion-item class="item-stable"
+              ng-click="toggleGroup(group)"
+              ng-class="{active: isGroupShown(group)}">
+        <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+      &nbsp;
+      Group {{group.name}}
+    </ion-item>
+    <ion-item class="item-accordion"
+              ng-repeat="item in group.items"
+              ng-show="isGroupShown(group)">
+      {{item}}
+    </ion-item>
+  </div>
+</ion-list>
+-->
+  </ion-content>
+</ion-view>

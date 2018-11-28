@@ -1,0 +1,61 @@
+<ion-view title="Settings" id="settings">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-notifications" ui-sref="notifications" ng-click=""><span ng-show="show_notice_count" class="badge badge-assertive noticebadge">{{notice_count}}</span></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+  <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+    <form id="settings-form3" class="list"><!--
+      <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle1">Designate yourself as host</ion-toggle>
+     <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle2">Show Games</ion-toggle>
+      <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle2">Show custom games/drills</ion-toggle>
+      <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settings-toggle1" name="Drills">Show LE/Military Drills</ion-toggle>-->
+      <div class="item range">
+        <div>LED Brightness: {{updatedValue}}% </div>
+        <i class="icon ion-ios-sunny-outline"></i>
+        <input type="range" name="brightness" min="0" max="100" ng-model="rangeValue" on-release="drag(rangeValue)" ng-change="">
+        <i class="icon ion-ios-sunny"></i>
+      </div>
+
+      <div class="item range">
+        <div>Lumatic Hit Senstivity: {{hitSensitivityRangeValue}}% <br/><span style="font-size:.8em;">{{sensitivity_msg}}</span></div>
+        <i class="icon ion-ios-circle-outline"></i>
+        <input type="range" name="hitsensitivity" min="0" max="100" ng-model="hitSensitivityRangeValue" on-release="changeHitSensitivity(hitSensitivityRangeValue)" ng-change="">
+        <i class="icon ion-ios-circle-filled"></i>
+
+      </div>
+
+
+      <ion-toggle toggle-class="toggle-positive" ng-model="idle_blink" ng-click="toggle_idle_blink(idle_blink)" ng-checked="{{idle_blink}}" id="settings-toggle2">Enable Idle Blink</ion-toggle>
+      <ion-toggle toggle-class="toggle-positive" ng-model="speed_start" ng-click="toggle_speed_start(speed_start)" ng-checked="{{speed_start}}" id="settings-toggle2">Enable Speed Start</ion-toggle>
+      <!--
+      <ion-toggle toggle-class="toggle-positive" ng-model="ir" ng-click=""  id="settings-ir">Enable infrared</ion-toggle>-->
+
+
+
+     <div class="item "> <div style="float:left;width:55%; line-height:59px;">Remotely Restart Targets</div><div>{{reset_msg}}</div><div  style="float:left;width:45%">
+        <button id="resetTargets" ng-click="resetTargets()" class="button button-positive   button-block">
+        <i class="icon ion-ios-keypad-outline"></i> Restart Targets
+      </button></div>
+      
+     </div>
+
+    <div class="item "> <div style="float:left;width:55%;line-height:59px;">Delete Target List</div>{{msg}}<div  style="float:left;width:45%">
+        <button id="clearTargetList" ng-click="clearTargetList()" class="button button-positive   button-block">
+          Delete Target List{{delete_target_label}}
+      </button></div>
+      
+    </div>
+
+     <div class="item "> <div style="float:left;width:55%;line-height:59px;">Quick Restart Basestation</div><div  style="float:left;width:45%">
+        <button id="restartGameScript" ng-click="restartGameScript()" class="button button-assertive   button-block">
+        <i class="icon ion-refresh"></i> {{restart_label}}
+      </button></div>
+      
+    </div>
+    </form>
+    <!--<button id="settings-button2" class="button button-positive  button-block icon ion-ios-cloud-download"> Download Updates</button>-->
+  </ion-content>
+</ion-view>

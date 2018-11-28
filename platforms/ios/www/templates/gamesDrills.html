@@ -1,0 +1,272 @@
+
+
+<ion-view title="Games &amp; Drills" id="page2" ng-controller="gamesDrills">
+    
+
+<div class="bar bar-subheader bar-light">
+  <h2 class="title">{{msg}}</h2>
+  <div ng-show="base_msg_window">
+    <button ng-click="base_msg_click()" class="button button-outline button-assertive" ><span  class="ion-wifi " style=";color:#ef473a;float:left;padding-right:18px;"> {{base_msg_data}}</span>
+    </button>
+  </div>
+</div>
+
+<ion-content padding="true" class="has-header has-subheader" on-swipe-left="swipe('left')">
+  <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+
+<style>.playername {
+  font-family: helvetica neue; font-size: 120%; font-style: italic; font-weight: bold;
+}
+
+ 
+/*.item {padding:1px;}*/
+.ion-ios-help-outline {font-size:160%;}
+
+. {padding-top:0px;padding-bottom:0px;}
+.button-clear { padding: 0px 5px 0px 0; } 
+
+.popup-container .popup {width:350px;}
+.popup-body label{font-size:150% !important;}
+.popup-title { font-size:130%; }
+.popup-buttons {min-height: 86px}
+.item-content {font-size: 120% !important}
+
+@font-face {
+    font-family: 'Impact';
+    src: url('css/Impact.eot');
+    src: url('css/Impact.eot') format('embedded-opentype'),
+         url('css/Impact.woff2') format('woff2'),
+         url('css/Impact.woff') format('woff'),
+         url('css/Impact.ttf') format('truetype'),
+         url('css/Impact.svg#Impact') format('svg');
+}
+
+.button-positive, .button-default { font-size:180%; }
+</style>
+  <!-- for android
+  <div class="bar  bar-light">
+  <h2 class="title">Configure a Match or Drill</h2>
+  <div ng-show="base_msg_window">
+    <button ng-click="base_msg_click()" class="button button-outline button-assertive" ><span  class="ion-wifi " style=";color:#ef473a;float:left;padding-right:18px;"> {{base_msg_data}}</span>
+    </button>
+  </div>
+</div>-->
+
+
+    <button class="button button-stable ion-arrow-down-b button-block " ng-click="showGameListPopup()">
+      {{choose_game}}
+    </button>
+    
+
+    <button id="gamesDrills-button1" ng-click="goToGame()" class="button button-positive   button-block"> 
+      Next <i class="icon ion-play"></i>
+    </button>
+          
+
+        <div class="list card" id="cardspace" ng-show="showcardspace">
+
+
+
+            <div class="list">
+              <div class="item item-divider">
+                Game Options
+              </div>
+   
+
+              
+              <label class="item item-input item-select ">
+                <div class="input-label">
+                 
+                  <button class=" icon-left  button-clear" ng-click="matchType_tip()"><i class="icon ion-ios-help-outline"></i></button>
+
+                  Match type
+                </div>
+                <select ng-model="matchtype" ng-options="m.name for m in matchtypes" ng-change="showmatchtype(matchtype.name)"></select>
+              </label>
+
+              
+              <div ng-show="showplayers">
+                <div class="item item-divider ">
+                        {{join_players}}
+                </div>
+                <div style="max-height:245px;overflow-y: scroll;">
+                <ion-list >
+                  <ion-radio ng-show="radio_list_players" class="playername" ng-click="add_player_to_game('{{player.id}}')" show-reorder="shouldShowReorder"  ng-repeat="player in player_names"  ng-model="isChecked"  ng-true-value="" ng-false-value=""  >{{player.name}}</ion-radio>
+                  <ion-checkbox ng-show="checkbox_list_players" class="playername" ng-click="add_player_to_game('{{player.id}}')" show-reorder="shouldShowReorder" ng-repeat="player in player_names"   >{{player.name}}</ion-checkbox>
+                </ion-list><!--  ng-model="player.isChecked" ng-checked="isChecked"-->
+                </div>
+              </div>
+
+              <label class="item item-input item-select ">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="maxHits_tip()"><i class="icon ion-ios-help-outline"></i></button>
+                  Max Hits
+                </div>
+
+                <select ng-model="max_target" ng-options="max.name for max in max_targets" ng-change="showMaxTargets(max_target.id)"></select>
+
+              </label>
+
+
+              <label class="item item-input item-select " ng-show="showMaxTimeLabel">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="maxTime_tip()"><i class="icon ion-ios-help-outline"></i></button>
+                  Max Time
+                </div>
+                <select ng-model="maxtime" ng-options="m.name for m in maxtimes " ng-change="showMaxTime(maxtime.id)"></select>
+              </label>
+
+              <label class="item item-input item-select " ng-show="showScoreLimitLabel">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="scoreLimit_tip()"><i class="icon ion-ios-help-outline"></i></button>
+                  Score Limit
+                </div>
+                <select ng-model="scorelimit" ng-options="m.name for m in scorelimits " ng-change="showScoreLimit(scorelimit.id)"></select>
+              </label>
+
+              <label class="item item-input item-select " ng-show="showSpeed">
+                <div class="input-label" >
+                  <button class=" icon-left  button-clear" ng-click="speed_tip()"><i class="icon ion-ios-help-outline"></i></button>
+                  Speed
+                </div>
+                <select ng-model="set_speed" ng-change="updateSpeed(set_speed.id)" ng-options="s.name for s in speed "></select>
+              </label>
+
+
+
+              <label class="item item-input item-select " ng-show="showPaddleSequence">
+                  <div class="input-label">
+                    <button class=" icon-left  button-clear" ng-click="paddleSequence_tip()"><i class="icon ion-ios-help-outline"></i></button>
+                    Paddle Sequence
+                  </div>
+                  <select ng-model="set_paddle_sequence" ng-change="updatePaddleSequence(set_paddle_sequence.name)" ng-options="s.name for s in paddle_sequence ">
+               
+                  </select>
+              </label>
+
+
+              <label class="item item-input item-select "  ng-show="showTargetsPerStation">
+                  <div class="input-label">
+                    <button class=" icon-left  button-clear" ng-click="targetsPerStation_tip()"><i class="icon ion-ios-help-outline"></i></button>
+                    Targets per station
+                  </div>
+                  <select ng-model="set_target_per_station" ng-change="udpateTargetsPerStation(set_target_per_station.id)" ng-options="s.name for s in targets_per_station ">
+               
+                  </select>
+              </label>
+
+ 
+       
+    
+              <li class="item item-input " ng-show="showDoubleTapOption">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="doubletap_tip()"><i class="icon ion-ios-help-outline" ></i></button>
+                  Double tap
+                </div>
+                <label class="toggle toggle-balanced" style="position: absolute;top: 10px;right: 16px;z-index: 3;">
+                   <input type="checkbox" ng-model="double_tap" ng-change="showDoubleTap(double_tap)">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
+
+              <li class="item item-input " ng-show="showShootNoShootOption">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="shootNoShoot_tip()"><i class="icon ion-ios-help-outline" ></i></button>
+                  Shoot / no shoot
+                </div>
+                <label class="toggle toggle-balanced" style="position: absolute;top: 10px;right: 16px;z-index: 3;">
+                   <input type="checkbox" ng-model="shoot_no_shoot" ng-change="showShootNoShoot(shoot_no_shoot)">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
+
+ 
+
+              <li class="item  item-input" ng-show="showTargetTimeoutOption">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="targetTimeout_tip()"><i class="icon ion-ios-help-outline" ></i></button>
+                  Target Timeout
+                </div>
+                <label class="toggle toggle-balanced" style="position: absolute;top: 10px;right: 16px;z-index: 3;">
+                   <input type="checkbox" ng-model="target_timeout" ng-change="showTargetTimeout(target_timeout)">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
+  
+              <li class="item  item-input" ng-show="showCaptureHoldOption">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="captureAndHold_tip()"><i class="icon ion-ios-help-outline" ></i></button>
+                  Capture and hold
+                </div>
+                <label class="toggle toggle-balanced" style="position: absolute;top: 10px;right: 16px;z-index: 3;">
+                   <input type="checkbox" ng-model="capture_and_hold"  ng-change="showCaptureHold(capture_and_hold)">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
+
+
+<!-- old version
+              <li class="item item-toggle" ng-show="showCaptureHoldOption">
+                 Capture and hold
+                 <label class="toggle toggle-balanced">
+                   <input type="checkbox" ng-model="capture_and_hold"  ng-change="showCaptureHold(capture_and_hold)">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
+
+-->
+               <label class="item item-input item-select " ng-show="showTimeBetweenWavesOption">
+                <div class="input-label">
+                  <button class=" icon-left  button-clear" ng-click="timeBetweenWaves_tip()"><i class="icon ion-ios-help-outline" ></i></button>
+                  Time between waves
+                </div>
+                <select ng-model="time_between_wave" ng-options="m.name for m in time_between_waves " ng-change="showTimeBetweenWaves(time_between_wave.id)"></select>
+              </label>
+
+
+
+            <button id="gamesDrills-button1" ng-click="goToGame()" class="button button-positive   button-block"> 
+                Next <i class="icon ion-play"></i>
+            </button>
+
+          </div>
+
+<div class="list" ng-show="showGameDescription">
+      <div class="item item-divider" style="font-size:350%;padding:30px 14px;text-transform: uppercase;font-family: Impact"> {{game_name}} 
+      </div>
+            
+      <div class="item item-text-wrap">
+            <p>{{card_objective}}</p>
+      </div>  
+    </div>
+
+          <div class="item item-image">
+            <img src="img/{{image}}">
+          </div>
+          
+            
+
+ 
+  
+        </div>
+
+
+    </ion-content>
+
+
+</ion-view>
+
